@@ -90,16 +90,16 @@ class CostumerManager:
         return None
 
 
-    # @log_decorator
-    # def search_customer(self):
-    #     """
-    #     Search for customer by gmail in the customers table.
-    #     """
-    #     gmail = input("Customer gmail: ")
-    #     query = "SELECT * FROM customers WHERE gmail LIKE %s;"
-    #     result = execute_query(query, params=("%" + gmail + "%",), fetch="all")
-    #     print("Customers:")
-    #     for customer in result:
-    #         print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
-    #               Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
-    #     return None
+    @log_decorator
+    def search_customer(self):
+        """
+        Search for customer by gmail in the customers table.
+        """
+        gmail = input("Customer gmail: ")
+        query = "SELECT * FROM customers WHERE gmail LIKE %s;"
+        result = execute_query(query, params=("%" + gmail + "%",), fetch="all")
+        print("Customers:")
+        for customer in result:
+            print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
+                  Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
+        return None
