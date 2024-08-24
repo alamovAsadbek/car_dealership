@@ -4,7 +4,7 @@ from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
 
 
-class FilialManager:
+class CarsManager:
     def __init__(self):
         self.db = Database()
 
@@ -92,6 +92,18 @@ class FilialManager:
         name = input("Car Name: ")
         query = "SELECT * FROM car WHERE NAME LIKE %s;"
         result = execute_query(query, params=("%" + name + "%",), fetch="all")
+        print("Cars:")
+        for car in result:
+            print(
+                f"- ID: {car[0]}, Name: {car[1]}, Brand: {car[2]}, Model: {car[3]}, Year: {car[4]}, Color: {car[5]}, Filial: {car[6]}, Created At: {car[7]}")
+
+    @log_decorator
+    def show_all_cars(self):
+        """
+        Show all cars in the car table.
+        """
+        query = "SELECT * FROM car;"
+        result = execute_query(query, fetch="all")
         print("Cars:")
         for car in result:
             print(
