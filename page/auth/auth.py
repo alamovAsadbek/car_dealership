@@ -1,5 +1,6 @@
 import datetime
 import hashlib
+import threading
 
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
@@ -12,7 +13,7 @@ class Auth:
 
     @log_decorator
     def login(self):
-        self.create_user_table()
+        threading.Thread(target=self.create_user_table).start()
         """
                 Authenticate a user by checking their email and password.
                 Updates the user's login status to True upon successful login.
@@ -24,7 +25,7 @@ class Auth:
             print("Login failed")
             return False
         elif user['password'] == password and user['email'] == email:
-            query = 'UPDATE users SET IS_LOGIN=%s WHERE EMAIL=%s;'
+            query = '''UPDATE users SET IS_LOGIN=%s WHERE EMAIL=%s;'''
             params = (True, email)
             with self.__database as db:
                 db.execute(query, params)
@@ -82,6 +83,7 @@ class Auth:
         """
                 Set the login status of all users to False (i.e., log out all users).
         """
+        self.create_user_table()
         query = 'UPDATE users SET IS_LOGIN=FALSE;'
         with self.__database as db:
             db.execute(query)

@@ -1,3 +1,5 @@
+import threading
+
 from main_files.decorator.decorator_func import log_decorator
 from page.auth.auth import Auth
 
@@ -15,7 +17,7 @@ def auth_menu():
             auth.login()
             auth_menu()
         elif user_input == 2:
-            pass
+            print("Good bye!")
         else:
             print("Invalid input")
             auth_menu()
@@ -26,4 +28,5 @@ def auth_menu():
 
 if __name__ == '__main__':
     auth = Auth()
-    auth.logout()
+    threading.Thread(target=auth.logout).start()
+    auth_menu()
