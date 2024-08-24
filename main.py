@@ -14,8 +14,9 @@ def auth_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
-            auth.login()
-            auth_menu()
+            result_login = auth.login()
+            if not result_login['is_login']:
+                auth_menu()
         elif user_input == 2:
             print("Good bye!")
         else:
