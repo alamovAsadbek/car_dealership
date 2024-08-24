@@ -12,6 +12,7 @@ class Auth:
 
     @log_decorator
     def login(self):
+        self.create_user_table()
         """
                 Authenticate a user by checking their email and password.
                 Updates the user's login status to True upon successful login.

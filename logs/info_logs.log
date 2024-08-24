@@ -1,2 +1,0 @@
-08/24/2024 12:41:04 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000001EC63E89550>, Composed([SQL('\n                                CREATE TABLE IF NOT EXISTS '), Identifier('users'), SQL(' (\n                                    ID SERIAL PRIMARY KEY\n                                );\n            ')])) kwargs: {}, result: None executed successfully.
-08/24/2024 12:41:04 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
