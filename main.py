@@ -50,13 +50,23 @@ def managers_menu():
         managers_menu()
 
 
+@log_decorator
+def color_menu():
+    text = '''
+1. Add new color
+2. Show all colors
+3. Back
+    '''
+    print(text)
+
+
 def cars_menu():
     print("""
 1. Add new car
 2. Update car information
 3. Delete car information   
 4. Show all cars
-5. Search car by model
+5. Search car by name
 6. logout
     """)
     choice = input("Choose menu: ")
