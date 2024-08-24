@@ -1,3 +1,9 @@
+"""menu:
+1. Add new filial
+2. Update filial
+3. Delete filial
+4. Show all filial
+    """
 from main_files.database.db_setting import Database
 from main_files.decorator.decorator_func import log_decorator
 
@@ -33,4 +39,15 @@ class Super_admin:
         name: str = input("Filial Name: ")
         self.db.execute_query(query="INSERT INTO filials (NAME) VALUES (%s)", params=(name,))
         print(f"Filial '{name}' added successfully.")
+        return None
+
+    @log_decorator
+    def update_filial(self):
+        """
+               Update the name of a filial in the filials table.
+        """
+        filial_id: int = int(input("Filial ID: "))
+        name: str = input("New Filial Name: ")
+        self.db.execute_query(query="UPDATE filials SET NAME=%s WHERE ID=%s", params=(name, filial_id))
+        print(f"Filial '{filial_id}' updated successfully.")
         return None
