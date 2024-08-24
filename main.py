@@ -2,6 +2,7 @@ import threading
 
 from main_files.decorator.decorator_func import log_decorator
 from page.auth.auth import Auth
+from role.super_admin.sup_admin import Super_admin
 
 
 @log_decorator
@@ -32,22 +33,30 @@ def filial_menu_for_sup_admin():
 2. Update filial
 3. Delete filial
 4. Show all filial
+5. Search filial by name
 5. logout
     """)
     choice = input("Choose menu: ")
+    sup_admin = Super_admin()
     if choice == '1':
         print("Add new filial")
-        pass
+        sup_admin.add_filial()
+        filial_menu_for_sup_admin()
     elif choice == '2':
         print("Update filial")
-        pass
+        sup_admin.update_filial()
+        filial_menu_for_sup_admin()
     elif choice == '3':
         print("Delete filial")
-        pass
+        sup_admin.delete_filial()
+        filial_menu_for_sup_admin()
     elif choice == '4':
         print("Show all filial")
-        pass
+        sup_admin.show_filials()
+        filial_menu_for_sup_admin()
     elif choice == '5':
+        sup_admin.search_filial()
+    elif choice == '6':
         print("Good bye!")
         auth.logout()
 
@@ -55,4 +64,4 @@ def filial_menu_for_sup_admin():
 if __name__ == '__main__':
     auth = Auth()
     threading.Thread(target=auth.logout).start()
-    auth_menu()
+    filial_menu_for_sup_admin()
