@@ -27,6 +27,100 @@ def auth_menu():
         auth_menu()
 
 
+def managers_menu():
+    print("""
+1. Show all information
+2. Customer manager
+3. Cars manager
+4. Logout
+    """)
+    choice = input("Choose menu: ")
+    if choice == '1':
+        print("Show all information")
+        pass
+    elif choice == '2':
+        print("Customer filial_manager")
+        pass
+    elif choice == '3':
+        print("Cars filial_manager")
+        cars_menu()
+    elif choice == '4':
+        print("Logout")
+        managers_menu()
+
+
+def cars_menu():
+    print("""
+1. Add new car
+2. Update car information
+3. Delete car information   
+4. Show all cars
+5. Search car by model
+6. logout
+    """)
+    choice = input("Choose menu: ")
+    cars_manager = FilialManager()
+    if choice == '1':
+        print("Add new car")
+        cars_manager.add_car()
+        cars_menu()
+    elif choice == '2':
+        print("Update car information")
+        cars_manager.update_car()
+        cars_menu()
+    elif choice == '3':
+        print("Delete car information")
+        cars_manager.delete_car()
+        cars_menu()
+    elif choice == '4':
+        print("Show all cars")
+        cars_manager.show_all_cars()
+        cars_menu()
+    elif choice == '5':
+        print("Search car by model")
+        cars_manager.search_car_by_model()
+        cars_menu()
+    elif choice == '6':
+        print("Logout")
+        managers_menu()
+
+
+def customer_menu():
+    print("""
+1. Add new customer
+2. Update customer information
+3. Delete customer information
+4. Show all customer
+5. Search customer by name
+6. logout
+    """)
+    choice = input("Choose menu: ")
+    customer = CostumerManager()
+    if choice == '1':
+        print("Add new customer")
+        customer.add_customer()
+        customer_menu()
+    elif choice == '2':
+        print("Update customer information")
+        customer.update_customer()
+        customer_menu()
+    elif choice == '3':
+        print("Delete customer information")
+        customer.delete_customer()
+        customer_menu()
+    elif choice == '4':
+        print("Show all customer")
+        customer.show_customers()
+        customer_menu()
+    elif choice == '5':
+        print("Search customer by name")
+        customer.search_by_name()
+        customer_menu()
+    elif choice == '6':
+        print("Logout")
+        managers_menu()
+
+
 def filial_menu_for_sup_admin():
     print("""
 1. Add new filial
@@ -65,4 +159,4 @@ def filial_menu_for_sup_admin():
 if __name__ == '__main__':
     auth = Auth()
     threading.Thread(target=auth.logout).start()
-    filial_menu_for_sup_admin()
+    auth_menu()

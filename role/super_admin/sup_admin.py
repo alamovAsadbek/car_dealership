@@ -4,6 +4,7 @@ from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
 from psycopg2 import sql
 
+
 class Super_admin:
     def __init__(self):
         self.db = Database()
@@ -33,8 +34,8 @@ class Super_admin:
         threading.Thread(target=self.create_filial_table).start()
         name = input("Filial Name: ").strip()
         address = input("Filial Address: ").strip()
-        query='''INSERT INTO filials (NAME, ADDRESS) VALUES (%s, %s);'''
-        params=(name, address)
+        query = '''INSERT INTO filials (NAME, ADDRESS) VALUES (%s, %s);'''
+        params = (name, address)
         threading.Thread(target=execute_query, args=(query, params)).start()
         print(f"Filial '{name}' added successfully.")
         return None
