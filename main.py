@@ -56,6 +56,7 @@ def filial_menu_for_sup_admin():
         filial_menu_for_sup_admin()
     elif choice == '5':
         sup_admin.search_filial()
+        filial_menu_for_sup_admin()
     elif choice == '6':
         print("Good bye!")
         auth.logout()
