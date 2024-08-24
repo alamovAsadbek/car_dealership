@@ -84,3 +84,15 @@ class FilialManager:
         print(f"Car ID {car_id} deleted successfully.")
         return None
 
+    @log_decorator
+    def search_car(self):
+        """
+        Search for cars by name in the car table.
+        """
+        name = input("Car Name: ")
+        query = "SELECT * FROM car WHERE NAME LIKE %s;"
+        result = execute_query(query, params=("%" + name + "%",), fetch="all")
+        print("Cars:")
+        for car in result:
+            print(
+                f"- ID: {car[0]}, Name: {car[1]}, Brand: {car[2]}, Model: {car[3]}, Year: {car[4]}, Color: {car[5]}, Filial: {car[6]}, Created At: {car[7]}")
