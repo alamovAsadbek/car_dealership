@@ -26,6 +26,32 @@ def auth_menu():
         auth_menu()
 
 
+def filial_menu_for_sup_admin():
+    print("""
+1. Add new filial
+2. Update filial
+3. Delete filial
+4. Show all filial
+5. logout
+    """)
+    choice = input("Choose menu: ")
+    if choice == '1':
+        print("Add new filial")
+        pass
+    elif choice == '2':
+        print("Update filial")
+        pass
+    elif choice == '3':
+        print("Delete filial")
+        pass
+    elif choice == '4':
+        print("Show all filial")
+        pass
+    elif choice == '5':
+        print("Good bye!")
+        auth.logout()
+
+
 if __name__ == '__main__':
     auth = Auth()
     threading.Thread(target=auth.logout).start()
