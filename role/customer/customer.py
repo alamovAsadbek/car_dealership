@@ -64,3 +64,15 @@ class CostumerManager:
         print(f"Customer ID {customer_id} updated successfully.")
         return None
 
+
+    @log_decorator
+    def delete_customer(self):
+        """
+        Delete a customer from the customers table.
+        """
+        customer_id = int(input("Customer ID: "))
+        execute_query(query="DELETE FROM customers WHERE ID=%s", params=(customer_id,))
+        print(f"Customer ID {customer_id} deleted successfully.")
+        return None
+
+
