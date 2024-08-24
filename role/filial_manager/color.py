@@ -38,4 +38,14 @@ class ColorManager:
         print(f"Car color added successfully with code {color_code}.")
         return None
 
-
+    @log_decorator
+    def show_car_colors(self):
+        """
+        Show all car colors in the color table.
+        """
+        query = "SELECT * FROM color;"
+        result = execute_query(query, fetch="all")
+        print("Car Colors:")
+        for color in result:
+            print(f"- ID: {color[0]}, Name: {color[1]}, Code: {color[2]}")
+        return None
