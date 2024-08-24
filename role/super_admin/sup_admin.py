@@ -46,8 +46,10 @@ class Super_admin:
         """
                Update the name of a filial in the filials table.
         """
-        filial_id: int = int(input("Filial ID: "))
-        name: str = input("New Filial Name: ")
-        self.db.execute_query(query="UPDATE filials SET NAME=%s WHERE ID=%s", params=(name, filial_id))
-        print(f"Filial '{filial_id}' updated successfully.")
-        return None
+        filial_id: int = int(input("Enter filial ID to update: "))
+        name: str = input("Enter new filial Name: ")
+        addres: str = input("Enter new filial location: ")
+        self.db.execute_query(query="UPDATE filials SET NAME=%s, ADDRESS=%s WHERE ID=%s",
+                              params=(name, addres, filial_id))
+        print(f"Filial with ID '{filial_id}' updated successfully.")
+        return Noneg
