@@ -2,8 +2,9 @@ import threading
 
 from main_files.decorator.decorator_func import log_decorator
 from page.auth.auth import Auth
+from role.filial_manager.color import ColorManager
+from role.filial_manager.model import ModelManager
 from role.super_admin.sup_admin import Super_admin
-from role.filial_manager.manager import FilialManager
 
 
 @log_decorator
@@ -53,12 +54,48 @@ def managers_menu():
 
 @log_decorator
 def color_menu():
-    text = '''
+    print('''
 1. Add new color
 2. Show all colors
 3. Back
-    '''
-    print(text)
+    ''')
+    choice = input("Choose menu: ")
+    color_manager = ColorManager()
+    if choice == '1':
+        print("Add new color")
+        color_manager.add_color()
+        color_menu()
+    elif choice == '2':
+        print("Show all colors")
+        color_manager.show_all_colors()
+        color_menu()
+    elif choice == '3':
+        print("Back")
+        managers_menu()
+    else:
+        print("Invalid input")
+        color_menu()
+
+
+@log_decorator()
+def model_menu():
+    print("""
+1. Add new model
+2. Show all models
+    """)
+    choice = input("Choose menu: ")
+    model_manager = ModelManager()
+    if choice == '1':
+        print("Add new model")
+        model_manager.add_model()
+        model_menu()
+    elif choice == '2':
+        print("Show all models")
+        model_manager.show_all_models()
+        model_menu()
+    else:
+        print("Invalid input")
+        model_menu()
 
 
 def cars_menu():
