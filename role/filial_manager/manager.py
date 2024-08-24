@@ -51,3 +51,25 @@ class FilialManager:
         print("Car added successfully.")
         return None
 
+    @log_decorator
+    def update_car(self):
+        """
+        Update the details of a car in the database.
+        """
+        car_id = int(input("Enter car ID: "))
+        car_name = input("Enter new car name: ")
+        brand_id = int(input("Enter new car brand ID: "))
+        model = input("Enter new car model id: ")
+        year = int(input("Enter new car year: "))
+        color_id = int(input("Enter new car color ID: "))
+        filial_id = int(input("Enter new car filial ID: "))
+        query = '''
+                UPDATE car 
+                SET NAME=%s, BRAND_ID=%s, MODEL=%s, YEAR=%s, COLOR_ID=%s, FILIAL_ID=%s 
+                WHERE ID=%s;
+            '''
+        params = (car_name, brand_id, model, year, color_id, filial_id, car_id)
+        threading.Thread(target=execute_query, args=(query, params)).start()
+        print("Car details updated successfully.")
+        return None
+
