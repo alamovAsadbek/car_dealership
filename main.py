@@ -63,11 +63,11 @@ def color_menu():
     color_manager = ColorManager()
     if choice == '1':
         print("Add new color")
-        color_manager.add_color()
+        color_manager.add_car_color()
         color_menu()
     elif choice == '2':
         print("Show all colors")
-        color_manager.show_all_colors()
+        color_manager.show_car_colors()
         color_menu()
     elif choice == '3':
         print("Back")
@@ -87,11 +87,11 @@ def model_menu():
     model_manager = ModelManager()
     if choice == '1':
         print("Add new model")
-        model_manager.add_model()
+        model_manager.add_car_model()
         model_menu()
     elif choice == '2':
         print("Show all models")
-        model_manager.show_all_models()
+        model_manager.show_all_model()
         model_menu()
     else:
         print("Invalid input")
