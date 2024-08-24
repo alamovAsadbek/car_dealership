@@ -52,4 +52,28 @@ class Super_admin:
         self.db.execute_query(query="UPDATE filials SET NAME=%s, ADDRESS=%s WHERE ID=%s",
                               params=(name, addres, filial_id))
         print(f"Filial with ID '{filial_id}' updated successfully.")
-        return Noneg
+        return
+
+    @log_decorator
+    def delete_filial(self):
+        """
+               Delete a filial from the filials table.
+        """
+        filial_id: int = int(input("Enter filial ID to delete: "))
+        self.db.execute_query(query="DELETE FROM filials WHERE ID=%s", params=(filial_id,))
+        print(f"Filial with ID '{filial_id}' deleted successfully.")
+        return
+
+    @log_decorator
+    def show_all_filials(self):
+        """
+               Show all filials in the filials table.
+        """
+        filials = self.db.execute_query(query="SELECT * FROM filials", fetch="all")
+        if filials:
+            print("Filials:")
+            for filial in filials:
+                print(f"ID: {filial[0]}, Name: {filial[1]}, Address: {filial[2]}")
+        else:
+            print("No filials found.")
+        return
