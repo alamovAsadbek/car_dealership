@@ -23,3 +23,14 @@ class Super_admin:
         with self.__database as cursor:
             cursor.execute(query)
         return True
+
+    @log_decorator
+    def add_filial(self):
+        """
+               Add a new filial to the filials table.
+        """
+        self.create_filial_table()
+        name: str = input("Filial Name: ")
+        self.db.execute_query(query="INSERT INTO filials (NAME) VALUES (%s)", params=(name,))
+        print(f"Filial '{name}' added successfully.")
+        return None
