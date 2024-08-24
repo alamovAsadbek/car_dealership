@@ -27,6 +27,11 @@ def auth_menu():
         auth_menu()
 
 
+@log_decorator
+def super_admin_menu():
+    pass
+
+
 if __name__ == '__main__':
     auth = Auth()
     threading.Thread(target=auth.logout).start()
