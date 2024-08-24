@@ -73,3 +73,14 @@ class FilialManager:
         print("Car details updated successfully.")
         return None
 
+    @log_decorator
+    def delete_car(self):
+        """
+        Delete a car from the database.
+        """
+        car_id = int(input("Enter car ID: "))
+        query = "DELETE FROM car WHERE ID=%s"
+        threading.Thread(target=execute_query, args=(query, (car_id,))).start()
+        print(f"Car ID {car_id} deleted successfully.")
+        return None
+
