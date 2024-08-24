@@ -46,3 +46,21 @@ class CostumerManager:
         print(f"Customer '{first_name} {last_name}' added successfully.")
         return None
 
+
+    @log_decorator
+    def update_customer(self):
+        """
+        Update the name and address of a customer in the customers table.
+        """
+        customer_id = int(input("Customer ID: "))
+        first_name = input("New Customer first name: ")
+        last_name = input("New Customer last name: ")
+        phone_number = input("New Customer phone number: ")
+        gmail = input("New Customer gmail: ")
+        execute_query(
+            query="UPDATE customers SET first_name=%s, last_name=%s, phone_number=%s, gmail=%s WHERE ID=%s",
+            params=(first_name, last_name, phone_number, gmail, customer_id)
+        )
+        print(f"Customer ID {customer_id} updated successfully.")
+        return None
+
