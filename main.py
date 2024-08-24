@@ -44,6 +44,7 @@ def managers_menu():
     elif choice == '3':
         print("Cars filial_manager")
         cars_menu()
+        managers_menu()
     elif choice == '4':
         print("Logout")
         managers_menu()
@@ -114,7 +115,7 @@ def customer_menu():
         customer_menu()
     elif choice == '5':
         print("Search customer by name")
-        customer.search_by_name()
+        customer.search_customer()
         customer_menu()
     elif choice == '6':
         print("Logout")
