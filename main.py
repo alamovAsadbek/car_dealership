@@ -1,8 +1,11 @@
 import threading
 
 from main_files.decorator.decorator_func import log_decorator
+
 from page.auth.auth import Auth
+
 from role.filial_manager.color import ColorManager
+from role.filial_manager.manager import CarsManager
 from role.filial_manager.model import ModelManager
 from role.super_admin.sup_admin import Super_admin
 
@@ -28,7 +31,7 @@ def auth_menu():
         print(f'Error: {e}')
         auth_menu()
 
-
+@log_decorator
 def managers_menu():
     print("""
 1. Show all information
@@ -77,7 +80,7 @@ def color_menu():
         color_menu()
 
 
-@log_decorator()
+@log_decorator
 def model_menu():
     print("""
 1. Add new model
@@ -97,7 +100,7 @@ def model_menu():
         print("Invalid input")
         model_menu()
 
-
+@log_decorator
 def cars_menu():
     print("""
 1. Add new car
@@ -108,7 +111,7 @@ def cars_menu():
 6. logout
     """)
     choice = input("Choose menu: ")
-    cars_manager = FilialManager()
+    cars_manager = CarsManager()
     if choice == '1':
         print("Add new car")
         cars_manager.add_car()
@@ -127,49 +130,49 @@ def cars_menu():
         cars_menu()
     elif choice == '5':
         print("Search car by model")
-        cars_manager.search_car_by_model()
+        cars_manager.search_car()
         cars_menu()
     elif choice == '6':
         print("Logout")
         managers_menu()
 
 
-def customer_menu():
-    print("""
-1. Add new customer
-2. Update customer information
-3. Delete customer information
-4. Show all customer
-5. Search customer by name
-6. logout
-    """)
-    choice = input("Choose menu: ")
-    customer = CostumerManager()
-    if choice == '1':
-        print("Add new customer")
-        customer.add_customer()
-        customer_menu()
-    elif choice == '2':
-        print("Update customer information")
-        customer.update_customer()
-        customer_menu()
-    elif choice == '3':
-        print("Delete customer information")
-        customer.delete_customer()
-        customer_menu()
-    elif choice == '4':
-        print("Show all customer")
-        customer.show_customers()
-        customer_menu()
-    elif choice == '5':
-        print("Search customer by name")
-        customer.search_customer()
-        customer_menu()
-    elif choice == '6':
-        print("Logout")
-        managers_menu()
+# def customer_menu():
+#     print("""
+# 1. Add new customer
+# 2. Update customer information
+# 3. Delete customer information
+# 4. Show all customer
+# 5. Search customer by name
+# 6. logout
+#     """)
+#     choice = input("Choose menu: ")
+#     customer = CostumerManager()
+#     if choice == '1':
+#         print("Add new customer")
+#         customer.add_customer()
+#         customer_menu()
+#     elif choice == '2':
+#         print("Update customer information")
+#         customer.update_customer()
+#         customer_menu()
+#     elif choice == '3':
+#         print("Delete customer information")
+#         customer.delete_customer()
+#         customer_menu()
+#     elif choice == '4':
+#         print("Show all customer")
+#         customer.show_customers()
+#         customer_menu()
+#     elif choice == '5':
+#         print("Search customer by name")
+#         customer.search_customer()
+#         customer_menu()
+#     elif choice == '6':
+#         print("Logout")
+#         managers_menu()
 
-
+@log_decorator
 def filial_menu_for_sup_admin():
     print("""
 1. Add new filial
@@ -208,4 +211,4 @@ def filial_menu_for_sup_admin():
 if __name__ == '__main__':
     auth = Auth()
     threading.Thread(target=auth.logout).start()
-    auth_menu()
+    color_menu()

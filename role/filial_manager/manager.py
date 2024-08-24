@@ -20,7 +20,6 @@ class CarsManager:
                 YEAR INT NOT NULL,
                 MODEL_ID BIGINT NOT NULL REFERENCES MODEL(ID),
                 COLOR_ID BIGINT NOT NULL REFERENCES color(ID),
-                BRAND_ID BIGINT NOT NULL REFERENCES brand(ID),
                 FILIAL_ID BIGINT NOT NULL REFERENCES filial(ID),
                 CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
                 );

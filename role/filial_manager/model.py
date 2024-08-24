@@ -1,5 +1,4 @@
 import threading
-
 from main_files.database.db_setting import execute_query, Database
 from main_files.decorator.decorator_func import log_decorator
 
@@ -15,7 +14,7 @@ class ModelManager:
         query = '''
                 CREATE TABLE IF NOT EXISTS brand (
                 ID SERIAL PRIMARY KEY,
-                NAME VARCHAR(255) NOT NULL,
+                NAME VARCHAR(255) NOT NULL
                 );
             '''
         with self.db as cursor:
@@ -27,11 +26,11 @@ class ModelManager:
         """
         Add a new car brand to the database.
         """
-        threading.Thread(target=self.create_brand_table).start()
+        threading.Thread(target=self.create_model_table).start()
         brand_name = input("Enter car brand name: ")
 
         query = "INSERT INTO brand (NAME) VALUES (%s)"
-        threading.Thread(target=execute_query(query, (brand_name,))).start()
+        threading.Thread(target=execute_query, args=(query, (brand_name,))).start()
         print(f"Car brand added successfully.")
         return None
 
