@@ -66,3 +66,18 @@ class FilialManager:
         with self.db as cursor:
             cursor.execute(query)
             return None
+
+    @log_decorator
+    def add_car_color(self):
+        """
+        Add a new car color to the database.
+        """
+        threading.Thread(target=self.create_car_color_table).start()
+        color_name = input("Enter car color name: ")
+        color_code = generate_color_code()
+
+        query = "INSERT INTO color (NAME, CODE) VALUES (%s, %s)"
+        threading.Thread(target=execute_query(query, (color_name, color_code)))
+        print(f"Car color added successfully with code {color_code}.")
+        return None
+
