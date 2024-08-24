@@ -81,3 +81,15 @@ class FilialManager:
         print(f"Car color added successfully with code {color_code}.")
         return None
 
+    @log_decorator
+    def add_car_brand(self):
+        """
+        Add a new car brand to the database.
+        """
+        threading.Thread(target=self.create_brand_table).start()
+        brand_name = input("Enter car brand name: ")
+
+        query = "INSERT INTO brand (NAME) VALUES (%s)"
+        threading.Thread(target=execute_query(query, (brand_name,)))
+        print(f"Car brand added successfully.")
+        return None
