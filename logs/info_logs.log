@@ -1,0 +1,17 @@
+08/24/2024 12:49:13 - main_files.decorator.decorator_func - ERROR - Function execute: column "is_login" of relation "users" does not exist
+LINE 1: UPDATE users SET IS_LOGIN=FALSE;
+                         ^
+Traceback (most recent call last):
+  File "D:\Code\NAJOT TALIM\HOMEWORK\Lesson45\pythonProject1\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Code\NAJOT TALIM\HOMEWORK\Lesson45\pythonProject1\main_files\database\db_setting.py", line 37, in execute
+    self.cursor.execute(query, params)
+  File "D:\Code\NAJOT TALIM\HOMEWORK\Lesson45\pythonProject1\.venv\Lib\site-packages\psycopg2\extras.py", line 146, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: column "is_login" of relation "users" does not exist
+LINE 1: UPDATE users SET IS_LOGIN=FALSE;
+                         ^
+
+08/24/2024 12:49:14 - main_files.decorator.decorator_func - INFO - Function logout: args: (<page.auth.auth.Auth object at 0x00000257AF0CEA50>,) kwargs: {}, result: True executed successfully.
