@@ -36,3 +36,33 @@ class FilialManager:
         with self.db as cursor:
             cursor.execute(query)
             return None
+
+    @log_decorator
+    def create_car_color_table(self):
+        """
+        Create the manager table in the database if it does not already exist.
+        """
+        query = '''
+                CREATE TABLE IF NOT EXISTS color (
+                ID SERIAL PRIMARY KEY,
+                NAME VARCHAR(255) NOT NULL,
+                CODE VARCHAR(255) NOT NULL
+                );
+            '''
+        with self.db as cursor:
+            cursor.execute(query)
+            return None
+
+    def create_brand_table(self):
+        """
+        Create the car brand table in the database if it does not already exist.
+        """
+        query = '''
+                CREATE TABLE IF NOT EXISTS brand (
+                ID SERIAL PRIMARY KEY,
+                NAME VARCHAR(255) NOT NULL,
+                );
+            '''
+        with self.db as cursor:
+            cursor.execute(query)
+            return None
