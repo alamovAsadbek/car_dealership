@@ -3,6 +3,7 @@ import threading
 from main_files.decorator.decorator_func import log_decorator
 from page.auth.auth import Auth
 from role.super_admin.sup_admin import Super_admin
+from role.filial_manager.manager import FilialManager
 
 
 @log_decorator
