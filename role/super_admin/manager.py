@@ -5,7 +5,6 @@ from main_files.decorator.decorator_func import log_decorator
 from email_sender.email import send_mail
 
 
-
 class Manager:
     def __init__(self):
         self.db = Database()
@@ -38,7 +37,19 @@ class Manager:
         """
         threading.Thread(target=self.create_manager_table).start()
         name = input("Manager Name: ").strip()
-        email = input("Manager Email: ").strip()
+
+        while True:
+            email = input("Manager Email: ").strip()
+            if email.endswith("@gmail.com"):
+                query_check = "SELECT * FROM manager WHERE email = %s"
+                result = threading.Thread(execute_query(query_check, params=(email,), fetch="one")).start()
+                if result:
+                    print("Error! A manager with this email already exists.")
+                else:
+                    break
+            else:
+                print("Error! Email must end with '.gmail.com'!!!")
+
         phone_number = input("Manager Phone Number: ").strip()
         password = input("Manager Password: ").strip()
 
@@ -55,13 +66,9 @@ class Manager:
         """
 
         try:
-            send_mail_thread = threading.Thread(target=send_mail, args=(email, subject, message))
-            execute_query_thread = threading.Thread(target=execute_query,
-                                                    args=(
-                                                        query, (name, email, phone_number, hashed_password, filial_id)))
-
-            send_mail_thread.start()
-            execute_query_thread.start()
+            threading.Thread(target=send_mail, args=(email, subject, message)).start()
+            threading.Thread(target=execute_query,
+                             args=(query, (name, email, phone_number, hashed_password, filial_id))).start()
 
             print(f"Manager '{name}' added successfully.")
             return None
