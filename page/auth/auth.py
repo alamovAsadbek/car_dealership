@@ -29,34 +29,15 @@ class Auth:
         if email == SUPERADMIN_LOGIN and password == hashlib.sha256(SUPERADMIN_PASSWORD.encode('utf-8')).hexdigest():
             return {'is_login': True, 'role': 'super_admin'}
 
-        user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
-                             (email,), fetch='one')
-
-        if email == SUPERADMIN_LOGIN and password == SUPERADMIN_PASSWORD:
-            return True
-        user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
-                             (email,), fetch='one')
-
-        if email == SUPERADMIN_LOGIN and password == SUPERADMIN_PASSWORD:
-            return True
-
-        user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
-                             (email,), fetch='one')
-
-        user = execute_query("SELECT * FROM users WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,),
-                             fetch='one')
-
+        query = '''
+        SELECT * FROM USERS WHERE email=%s AND password=%s
+        '''
+        params = (email, password)
+        user = execute_query(query, params)
         if user is None:
             print("Login failed")
-            return False
-        elif user['password'] == password and user['email'] == email:
-            query = '''UPDATE users SET IS_LOGIN=%s WHERE EMAIL=%s;'''
-            params = (True, email)
-            with self.__database as db:
-                db.execute(query, params)
-                print('Login successful')
-                return {'is_login': True, 'role': 'user'}
-        return {'is_login': False}
+            return {'is_login': False, 'role': 'admin'}
+        return {'is_login': True, 'role': 'user'}
 
     @log_decorator
     def create_user_table(self):
@@ -70,6 +51,7 @@ class Auth:
         LASTNAME VARCHAR(255) NOT NULL,
         EMAIL VARCHAR(255) NOT NULL UNIQUE,
         PASSWORD VARCHAR(256) NOT NULL,
+        ROLE VARCHAR(255) NOT NULL DEFAULT 'user',
         IS_LOGIN BOOLEAN DEFAULT FALSE,
         CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         );
