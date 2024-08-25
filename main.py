@@ -306,17 +306,14 @@ def user_menu():
     user = CustomerManager()
     if choice == '1':
         print("Show my bought cars")
-<<<<<<< HEAD
         user.show_my_bought_cars()
         user_menu()
     elif choice == '2':
         print("Change my profile password")
         user.change_my_password()
-=======
         user_menu()
     elif choice == '2':
         print("Change my profile password")
->>>>>>> 83420bb85b6ac6cf1fef70d0c3c418c2621462ec
         user_menu()
     elif choice == '3':
         print("Good bye")
