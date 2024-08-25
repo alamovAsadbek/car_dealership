@@ -1,6 +1,5 @@
 import hashlib
 import threading
-
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
 from email_sender.email import send_mail
@@ -22,11 +21,13 @@ class Manager:
                 email VARCHAR(255) UNIQUE NOT NULL,
                 phone_number VARCHAR(255) UNIQUE NOT NULL,
                 password VARCHAR(255) UNIQUE NOT NULL,
-                filial_id INTEGER REFERENCES filial(id),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                status BOOLEAN DEFAULT False NOT NULL,1
+                filial_id INTEGER REFERENCES filials(id),
+                created_at TIMESTAMP DEFAULT DATE_TRUNC('minute', NOW())
             )
         """
-        with self.db.execute(query):
+        with self.db as cursor:
+            cursor.execute(query)
             return None
 
     @log_decorator
@@ -35,7 +36,6 @@ class Manager:
         Add a new manager to the database.
         """
         threading.Thread(target=self.create_manager_table).start()
-
         name = input("Manager Name: ").strip()
         email = input("Manager Email: ").strip()
         phone_number = input("Manager Phone Number: ").strip()
@@ -54,9 +54,14 @@ class Manager:
         """
 
         try:
-            threading.Thread(target=send_mail, args=(email, subject, message)).start()
-            threading.Thread(target=execute_query,
-                             args=(query, (name, email, phone_number, hashed_password, filial_id))).start()
+            send_mail_thread = threading.Thread(target=send_mail, args=(email, subject, message))
+            execute_query_thread = threading.Thread(target=execute_query,
+                                                    args=(
+                                                        query, (name, email, phone_number, hashed_password, filial_id)))
+
+            send_mail_thread.start()
+            execute_query_thread.start()
+
             print(f"Manager '{name}' added successfully.")
             return None
         except Exception as e:
@@ -74,9 +79,11 @@ class Manager:
         phone_number = input("Enter new manager phone number: ").strip()
         filial_id = input("Enter new filial ID: ")
         query = """UPDATE manager SET name=%s, email=%s, phone_number=%s, filial_id=%s WHERE id=%s;"""
-        threading.Thread(target=execute_query, args=(query, (name, email, phone_number, filial_id, manager_id))).start()
-        print(f"Manager details updated successfully.")
-        return None
+        try:
+            execute_query(query, (name, email, phone_number, filial_id, manager_id))
+            print(f"Manager details updated successfully.")
+        except Exception as e:
+            print(f"Failed to update manager: {e}")
 
     @log_decorator
     def delete_manager(self):
@@ -85,9 +92,11 @@ class Manager:
         """
         manager_id = int(input("Enter manager ID: "))
         query = "DELETE FROM manager WHERE id=%s"
-        threading.Thread(target=execute_query, args=(query, (manager_id,))).start()
-        print(f"Manager ID {manager_id} deleted successfully.")
-        return None
+        try:
+            execute_query(query, (manager_id,))
+            print(f"Manager ID {manager_id} deleted successfully.")
+        except Exception as e:
+            print(f"Failed to delete manager: {e}")
 
     @log_decorator
     def show_all_managers(self):
@@ -96,10 +105,13 @@ class Manager:
         """
         query = "SELECT * FROM manager;"
         result = execute_query(query, fetch="all")
-        print("Managers:")
-        for manager in result:
-            print(
-                f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
+        if result:
+            print("Managers:")
+            for manager in result:
+                print(
+                    f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
+        else:
+            print("No managers found.")
 
     @log_decorator
     def search_manager(self):
@@ -109,7 +121,10 @@ class Manager:
         name = input("Manager Name: ")
         query = "SELECT * FROM manager WHERE name LIKE %s;"
         result = execute_query(query, params=("%" + name + "%",), fetch="all")
-        print("Managers:")
-        for manager in result:
-            print(
-                f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
+        if result:
+            print("Managers:")
+            for manager in result:
+                print(
+                    f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
+        else:
+            print("No managers found.")
