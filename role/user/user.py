@@ -8,7 +8,7 @@ class UserManager:
         self.db = Database()
 
 
-
+    @log_decorator
     def show_my_bought_cars(self):
         """
         Show my bought cars in the cars table.
