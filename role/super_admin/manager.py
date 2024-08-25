@@ -67,3 +67,14 @@ class Admin:
         print(f"Manager ID {manager_id} deleted successfully.")
         return None
 
+    @log_decorator
+    def show_all_managers(self):
+        """
+        Show all managers in the manager table.
+        """
+        query = "SELECT * FROM manager;"
+        result = execute_query(query, fetch="all")
+        print("Managers:")
+        for manager in result:
+            print(
+                f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
