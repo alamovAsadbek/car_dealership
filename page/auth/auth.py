@@ -28,13 +28,19 @@ class Auth:
             return {'is_login': True, 'role': 'super_admin'}
 
         query = '''
-        SELECT * FROM USERS WHERE email=%s AND password=%s
+        SELECT * FROM %s WHERE email=%s AND password=%s
         '''
-        params = (email, password)
+        table_name = 'users'
+        params = (table_name, email, password)
         user = execute_query(query, params)
         if user is None:
-            print("Login failed")
-            return {'is_login': False, 'role': 'admin'}
+            table_name = 'manager'
+            params = (table_name, email, password)
+            user = execute_query(query, params)
+            if user is None:
+                print("Login failed")
+                return {'is_login': False, 'role': 'admin'}
+        print(user)
         return {'is_login': True, 'role': 'user'}
 
     @log_decorator
