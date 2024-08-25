@@ -1,8 +1,10 @@
+import threading
+
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
 
 
-class Super_admin:
+class FilialManager:
     def __init__(self):
         self.db = Database()
 
@@ -21,7 +23,6 @@ class Super_admin:
         '''
         with self.db as cursor:
             cursor.execute(query)
-            print("Filials table created successfully.")
             return None
 
     @log_decorator
@@ -29,13 +30,12 @@ class Super_admin:
         """
         Add a new filial to the filials table.
         """
-        self.create_filial_table()
-        name = input("Filial Name: ")
-        address = input("Filial Address: ")
-        execute_query(
-            query="INSERT INTO filials (NAME, ADDRESS) VALUES (%s, %s)",
-            params=(name, address)
-        )
+        threading.Thread(target=self.create_filial_table).start()
+        name = input("Filial Name: ").strip()
+        address = input("Filial Address: ").strip()
+        query = '''INSERT INTO filials (NAME, ADDRESS) VALUES (%s, %s);'''
+        params = (name, address)
+        threading.Thread(target=execute_query, args=(query, params)).start()
         print(f"Filial '{name}' added successfully.")
         return None
 

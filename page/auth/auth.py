@@ -11,6 +11,29 @@ class Auth:
         self.__database = Database()
         self.__super_admin = {'email': 'alamovasad@gmail.com', 'password': '000'}
 
+    # @log_decorator
+    # def login(self):
+    #     threading.Thread(target=self.create_user_table).start()
+    #     """
+    #             Authenticate a user by checking their email and password.
+    #             Updates the user's login status to True upon successful login.
+    #     """
+    #     email: str = input("Email: ").strip()
+    #     password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
+    #     user = execute_query("SELECT * FROM users WHERE EMAIL=%s", (email,), fetch='one')
+
+    #     if user is None:
+    #         print("Login failed")
+    #         return False
+    #     elif user['password'] == password and user['email'] == email:
+    #         query = '''UPDATE users SET IS_LOGIN=%s WHERE EMAIL=%s;'''
+    #         params = (True, email)
+    #         with self.__database as db:
+    #             db.execute(query, params)
+    #             print('Login successful')
+    #             return True
+    #     return False
+
     @log_decorator
     def login(self):
         """
@@ -19,10 +42,13 @@ class Auth:
         """
         email: str = input("Email: ").strip()
         password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
+
         if email == self.__super_admin['email']:
             if hashlib.sha256(password.encode()).hexdigest() == self.__super_admin['password']:
                 return {'is_login': True, 'role': 'super_admin'}
-        user = execute_query("SELECT * FROM users WHERE EMAIL=%s", (email,), fetch='one')
+        user = execute_query("SELECT * FROM users WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,),
+                             fetch='one')
+
         if user is None:
             print("Login failed")
             return False
