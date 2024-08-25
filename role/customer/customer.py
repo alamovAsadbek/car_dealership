@@ -95,6 +95,18 @@ class CustomerManager:
         except Exception as e:
             print(f"Failed to delete customer: {e}")
         return None
+    
+    def change_my_password(self):
+        """
+        change a customer pasword from the customers table.
+        """
+        customer_password = int(input("CUSTOMER PASSWORD: "))
+        try:
+            execute_query(query="UPDATE FROM customers WHERE PASSWORD=%s", params=(customer_password,))
+            print(f"Customer ID {customer_password} updated successfully.")
+        except Exception as e:
+            print(f"Failed to update customer password: {e}")
+        return None
 
     @log_decorator
     def show_customers(self):
