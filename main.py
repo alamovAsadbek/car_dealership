@@ -1,12 +1,10 @@
 import threading
 
 from main_files.decorator.decorator_func import log_decorator
-
 from page.auth.auth import Auth
 from role.customer.customer import CustomerManager
-
-from role.filial_manager.color import ColorManager
 from role.filial_manager.car_manager import CarsManager
+from role.filial_manager.color import ColorManager
 from role.filial_manager.model import ModelManager
 from role.super_admin.filial import FilialManager
 from role.super_admin.manager import Manager
@@ -48,8 +46,13 @@ def auth_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
+
+            result_login = auth.login()
+            if not result_login['is_login']:
+                auth_menu()
+
             auth.login()
-            auth_menu()
+
         elif user_input == 2:
             print("Good bye!")
             Auth.logout()
@@ -62,6 +65,10 @@ def auth_menu():
 
 
 @log_decorator
+def super_admin_menu():
+    pass
+
+
 def managers_menu():
     print("""
 1. Show all information                             # Tugallanmagan
@@ -277,7 +284,6 @@ def filial_menu_for_sup_admin():
         auth.logout()
 
 
-
 @log_decorator
 def user_menu():
     print(
@@ -288,7 +294,6 @@ def user_menu():
 
 """)
     choice = input("Choose menu: ")
-    filial = FilialManager()
     if choice == '1':
         print("Show my bought cars")
         pass
@@ -299,7 +304,7 @@ def user_menu():
         user_menu()
     elif choice == '3':
         print("Good bye")
-        auth.logout
+        auth.logout()
 
 
 if __name__ == '__main__':
