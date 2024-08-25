@@ -40,6 +40,12 @@ class Auth:
         user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
                              (email,), fetch='one')
 
+        if email == SUPERADMIN_LOGIN and password == SUPERADMIN_PASSWORD:
+            return super_admin_menu()
+
+        user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
+                             (email,), fetch='one')
+
         if email == self.__super_admin['email']:
             if hashlib.sha256(self.__super_admin['password'].encode()).hexdigest() == password:
                 return {'is_login': True, 'role': 'super_admin'}
