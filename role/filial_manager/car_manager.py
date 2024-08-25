@@ -28,6 +28,7 @@ class CarsManager:
         with self.db as cursor:
             cursor.execute(query)
             return None
+        
 
     def add_car(self):
         """
@@ -49,6 +50,10 @@ class CarsManager:
                          args=(query, (car_name, brand_id, model, year, color_id, filial_id))).start()
         print("Car added successfully.")
         return None
+    
+
+    def buy_car():
+        pass
 
     @log_decorator
     def update_car(self):

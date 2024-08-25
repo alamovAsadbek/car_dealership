@@ -6,8 +6,10 @@ from role.customer.customer import CustomerManager
 from role.filial_manager.car_manager import CarsManager
 from role.filial_manager.color import ColorManager
 from role.filial_manager.model import ModelManager
+from role.filial_manager.sales import Sales , sell_car
 from role.super_admin.filial import FilialManager
 from role.super_admin.manager import Manager
+from role.user.user import UserManager
 
 
 @log_decorator
@@ -138,35 +140,41 @@ def model_menu():
 def cars_menu():
     print("""
 1. Add new car
-2. Update car information
-3. Delete car information   
-4. Show all cars
-5. Search car by name
-6. logout
+2. Sell car
+3. Update car information
+4. Delete car information   
+5. Show all cars
+6. Search car by name
+7. logout
     """)
     choice = input("Choose menu: ")
     cars_manager = CarsManager()
+    sales = Sales()
     if choice == '1':
         print("Add new car")
         cars_manager.add_car()
         cars_menu()
     elif choice == '2':
-        print("Update car information")
-        cars_manager.update_car()
+        print("Sale car ")
+        sales.sell_car()
         cars_menu()
     elif choice == '3':
-        print("Delete car information")
-        cars_manager.delete_car()
+        print("update car information")
+        cars_manager.update_car()
         cars_menu()
     elif choice == '4':
+        print("Delete car information ")
+        cars_manager.delete_car()
+        cars_menu()
+    elif choice == '5':
         print("Show all cars")
         cars_manager.show_all_cars()
         cars_menu()
-    elif choice == '5':
-        print("Search car by model")
+    elif choice == '6':
+        print("Search car by name")
         cars_manager.search_car()
         cars_menu()
-    elif choice == '6':
+    elif choice == '7':
         print("Logout")
         managers_menu()
 
@@ -290,10 +298,10 @@ def user_menu():
 
 """)
     choice = input("Choose menu: ")
-    filial = FilialManager()
+    user = UserManager()
     if choice == '1':
         print("Show my bought cars")
-        pass
+        user.show_my_bought_cars()
         user_menu()
     elif choice == '2':
         print("Change my profile password")

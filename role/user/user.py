@@ -7,7 +7,6 @@ class UserManager:
     def __init__(self):
         self.db = Database()
 
-
     @log_decorator
     def show_my_bought_cars(self):
         """
