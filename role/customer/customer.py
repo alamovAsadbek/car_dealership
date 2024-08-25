@@ -2,13 +2,11 @@ import threading
 
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
-from psycopg2 import sql
 
 
-class CostumerManager:
+class CustomerManager:
     def __init__(self):
         self.db = Database()
-
 
     @log_decorator
     def create_customer_table(self):
@@ -29,7 +27,6 @@ class CostumerManager:
             cursor.execute(query)
             return None
 
-
     @log_decorator
     def add_customer(self):
         """
@@ -45,7 +42,6 @@ class CostumerManager:
         threading.Thread(target=execute_query, args=(query, params)).start()
         print(f"Customer '{first_name} {last_name}' added successfully.")
         return None
-
 
     @log_decorator
     def update_customer(self):
@@ -64,7 +60,6 @@ class CostumerManager:
         print(f"Customer ID {customer_id} updated successfully.")
         return None
 
-
     @log_decorator
     def delete_customer(self):
         """
@@ -74,7 +69,6 @@ class CostumerManager:
         execute_query(query="DELETE FROM customers WHERE ID=%s", params=(customer_id,))
         print(f"Customer ID {customer_id} deleted successfully.")
         return None
-
 
     @log_decorator
     def show_customers(self):
@@ -88,7 +82,6 @@ class CostumerManager:
             print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
                   Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
         return None
-
 
     @log_decorator
     def search_customer(self):
