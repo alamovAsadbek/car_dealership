@@ -20,6 +20,7 @@ class CustomerManager:
             last_name VARCHAR(64) NOT NULL,
             phone_number VARCHAR(64) NOT NULL,
             gmail VARCHAR(64) NOT NULL,
+            password VARCHAR(255) UNIQUE NOT NULL,
             CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
         '''
