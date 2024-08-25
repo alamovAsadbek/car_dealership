@@ -51,6 +51,8 @@ def auth_menu():
                 auth_menu()
             elif result_login['role'] == 'super_admin':
                 super_admin_menu()
+            elif result_login['role'] == 'user':
+                user_menu()
             auth_menu()
         elif user_input == 2:
             print("Good bye!")
