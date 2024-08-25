@@ -78,3 +78,16 @@ class Admin:
         for manager in result:
             print(
                 f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
+
+    @log_decorator
+    def search_manager(self):
+        """
+        Search for managers by name in the manager table.
+        """
+        name = input("Manager Name: ")
+        query = "SELECT * FROM manager WHERE name LIKE %s;"
+        result = execute_query(query, params=("%" + name + "%",), fetch="all")
+        print("Managers:")
+        for manager in result:
+            print(
+                f"ID: {manager[0]}, Name: {manager[1]}, Email: {manager[2]}, Phone Number: {manager[3]}, Filial ID: {manager[4]}")
