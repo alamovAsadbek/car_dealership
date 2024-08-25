@@ -40,3 +40,20 @@ class Admin:
         threading.Thread(target=execute_query, args=(query, (name, email, phone_number, filial_id))).start()
         print(f"Manager '{name}' added successfully.")
         return None
+
+    @log_decorator
+    def update_manager(self):
+        """
+        Update the details of a manager in the database.
+        """
+        manager_id = int(input("Enter manager ID: "))
+        name = input("Enter new manager name: ").strip()
+        email = input("Enter new manager email: ").strip()
+        phone_number = input("Enter new manager phone number: ").strip()
+        filial_id = input("Enter new filial ID: ")
+        query = """UPDATE manager SET name=%s, email=%s, phone_number=%s, filial_id=%s WHERE id=%s;"""
+        threading.Thread(target=execute_query, args=(query, (name, email, phone_number, filial_id, manager_id))).start()
+        print(f"Manager details updated successfully.")
+        return None
+
+
