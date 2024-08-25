@@ -7,7 +7,31 @@ from page.auth.auth import Auth
 from role.filial_manager.color import ColorManager
 from role.filial_manager.car_manager import CarsManager
 from role.filial_manager.model import ModelManager
-from role.super_admin.sup_admin import Super_admin
+from role.super_admin.filial import Super_admin
+
+
+@log_decorator
+def super_admin_menu():
+    print("""
+1. Create a new manager
+2. Create a new filial
+3. Show all information
+4. Logout
+    """)
+    choice = input("Choose menu: ")
+    if choice == '1':
+        pass
+    elif choice == '2':
+        pass
+    elif choice == '3':
+        print("Show all information")
+        pass
+    elif choice == '4':
+        print("Good bye!")
+        auth_menu()
+    else:
+        print("Invalid input")
+        super_admin_menu()
 
 
 @log_decorator
