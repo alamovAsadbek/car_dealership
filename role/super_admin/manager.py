@@ -22,7 +22,7 @@ class Manager:
                 email VARCHAR(255) UNIQUE NOT NULL,
                 phone_number VARCHAR(255) UNIQUE NOT NULL,
                 password VARCHAR(255) UNIQUE NOT NULL,
-                status BOOLEAN DEFAULT False NOT NULL,1
+                status BOOLEAN DEFAULT False NOT NULL,
                 filial_id INTEGER REFERENCES filials(id),
                 created_at TIMESTAMP DEFAULT DATE_TRUNC('minute', NOW())
             )
