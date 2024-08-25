@@ -6,6 +6,7 @@ from main_files.decorator.decorator_func import log_decorator
 from email_sender.email import send_mail
 
 
+
 class Manager:
     def __init__(self):
         self.db = Database()

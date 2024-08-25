@@ -1,12 +1,24 @@
-08/24/2024 22:21:47 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000021336C5A8A0>, '\n        CREATE TABLE IF NOT EXISTS USERS (\n        ID SERIAL PRIMARY KEY,\n        FIRSTNAME VARCHAR(255) NOT NULL,\n        LASTNAME VARCHAR(255) NOT NULL,\n        EMAIL VARCHAR(255) NOT NULL UNIQUE,\n        PASSWORD VARCHAR(256) NOT NULL,\n        IS_LOGIN BOOLEAN DEFAULT FALSE,\n        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP\n        );\n        ') kwargs: {}, result: None executed successfully.
-08/24/2024 22:21:47 - main_files.decorator.decorator_func - INFO - Function create_user_table: args: (<page.auth.auth.Auth object at 0x0000021336C5A870>,) kwargs: {}, result: True executed successfully.
-08/24/2024 22:21:49 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000021336C5A8A0>, 'UPDATE users SET IS_LOGIN=FALSE;') kwargs: {}, result: None executed successfully.
-08/24/2024 22:21:49 - main_files.decorator.decorator_func - INFO - Function logout: args: (<page.auth.auth.Auth object at 0x0000021336C5A870>,) kwargs: {}, result: True executed successfully.
-08/24/2024 22:21:49 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000021336C5B110>, '\n                    CREATE TABLE IF NOT EXISTS color (\n                    ID SERIAL PRIMARY KEY,\n                    NAME VARCHAR(255) NOT NULL,\n                    CODE VARCHAR(255) NOT NULL UNIQUE\n                    );\n                ') kwargs: {}, result: None executed successfully.
-08/24/2024 22:21:49 - main_files.decorator.decorator_func - INFO - Function create_car_color_table: args: (<role.filial_manager.color.ColorManager object at 0x0000021336C5AF60>,) kwargs: {}, result: None executed successfully.
-08/24/2024 22:25:45 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000021336C5B170>, 'INSERT INTO color (NAME, CODE) VALUES (%s, %s)', ('white', '4545')) kwargs: {}, result: None executed successfully.
-08/24/2024 22:25:45 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('INSERT INTO color (NAME, CODE) VALUES (%s, %s)', ('white', '4545')) kwargs: {}, result: None executed successfully.
-08/24/2024 22:25:45 - main_files.decorator.decorator_func - INFO - Function add_car_color: args: (<role.filial_manager.color.ColorManager object at 0x0000021336C5AF60>,) kwargs: {}, result: None executed successfully.
-08/24/2024 22:25:50 - main_files.decorator.decorator_func - INFO - Function fetchall: args: (<main_files.database.db_setting.Database object at 0x0000021336C5B5F0>, 'SELECT * FROM color;', None) kwargs: {}, result: [[1, 'white', '4545']] executed successfully.
-08/24/2024 22:25:50 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM color;',) kwargs: {'fetch': 'all'}, result: [[1, 'white', '4545']] executed successfully.
-08/24/2024 22:25:50 - main_files.decorator.decorator_func - INFO - Function show_car_colors: args: (<role.filial_manager.color.ColorManager object at 0x0000021336C5B140>,) kwargs: {}, result: None executed successfully.
+08/25/2024 12:04:26 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000024ED8E704D0>, '\n        CREATE TABLE IF NOT EXISTS USERS (\n        ID SERIAL PRIMARY KEY,\n        FIRSTNAME VARCHAR(255) NOT NULL,\n        LASTNAME VARCHAR(255) NOT NULL,\n        EMAIL VARCHAR(255) NOT NULL UNIQUE,\n        PASSWORD VARCHAR(256) NOT NULL,\n        IS_LOGIN BOOLEAN DEFAULT FALSE,\n        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP\n        );\n        ') kwargs: {}, result: None executed successfully.
+08/25/2024 12:04:26 - main_files.decorator.decorator_func - INFO - Function create_user_table: args: (<page.auth.auth.Auth object at 0x0000024ED8E61C50>,) kwargs: {}, result: True executed successfully.
+08/25/2024 12:04:29 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000024ED8E704D0>, 'UPDATE users SET IS_LOGIN=FALSE;') kwargs: {}, result: None executed successfully.
+08/25/2024 12:04:29 - main_files.decorator.decorator_func - INFO - Function logout: args: (<page.auth.auth.Auth object at 0x0000024ED8E61C50>,) kwargs: {}, result: True executed successfully.
+08/25/2024 12:28:10 - main_files.decorator.decorator_func - ERROR - Function auth_menu: [Errno 22] Invalid argument
+Traceback (most recent call last):
+  File "c:\Jobir n\car_dealership\main.py", line 49, in auth_menu
+    user_input: int = int(input("Choose menu: "))
+                          ^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Jobir n\car_dealership\main.py", line 59, in auth_menu
+    print(f'Error: {e}')
+OSError: [Errno 22] Invalid argument
+datetime.datetime(2024, 8, 25, 6, 28)] executed successfully.
+08/25/2024 12:05:01 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000024ED8E704D0>, 'UPDATE users SET IS_LOGIN=%s WHERE EMAIL=%s;', (True, 'ahmedovj5016@gmail.com')) kwargs: {}, result: None executed successfully.
+08/25/2024 12:05:01 - main_files.decorator.decorator_func - INFO - Function login: args: (<page.auth.auth.Auth object at 0x0000024ED8E61C50>,) kwargs: {}, result: True executed successfully.
+08/25/2024 12:05:01 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
