@@ -41,7 +41,7 @@ class Auth:
             if user is None:
                 print("Login failed")
                 return {'is_login': False, 'role': 'admin'}
-            return {'is_login': False, 'role': 'manager'}
+            return {'is_login': True, 'role': 'manager'}
         return {'is_login': True, 'role': 'user'}
 
     @log_decorator
