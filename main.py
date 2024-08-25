@@ -13,9 +13,9 @@ from role.super_admin.manager import Manager
 @log_decorator
 def super_admin_menu():
     print("""
-1. Create manager
-2. Create filial
-3. Show all information                             # Tugallanmagan
+1. Manager
+2. Filial
+3. Show all information                             
 4. Logout
     """)
     choice = input("Choose menu: ")
