@@ -29,7 +29,6 @@ class CarsManager:
             cursor.execute(query)
             return None
 
-
     def add_car(self):
         """
         Add a new car to the database.
