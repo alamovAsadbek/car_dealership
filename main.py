@@ -1,12 +1,10 @@
 import threading
 
 from main_files.decorator.decorator_func import log_decorator
-
 from page.auth.auth import Auth
 from role.customer.customer import CustomerManager
-
-from role.filial_manager.color import ColorManager
 from role.filial_manager.car_manager import CarsManager
+from role.filial_manager.color import ColorManager
 from role.filial_manager.model import ModelManager
 from role.super_admin.filial import FilialManager
 from role.super_admin.manager import Manager
@@ -48,7 +46,11 @@ def auth_menu():
     try:
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
-            auth.login()
+            result_login = auth.login()
+            if not result_login['is_login']:
+                auth_menu()
+            elif result_login['role'] == 'super_admin':
+                super_admin_menu()
             auth_menu()
         elif user_input == 2:
             print("Good bye!")
@@ -275,7 +277,6 @@ def filial_menu_for_sup_admin():
     elif choice == '6':
         print("Good bye!")
         auth.logout()
-
 
 
 @log_decorator

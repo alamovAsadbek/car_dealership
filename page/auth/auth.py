@@ -9,7 +9,7 @@ class Auth:
     def __init__(self):
         self.created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S").__str__()
         self.__database = Database()
-        self.__super_admin = {'email': 'alamovasad@gmail.com', 'password': '000'}
+        self.__super_admin = {'email': 'alamovasad@gmail.com', 'password': '0000'}
 
     # @log_decorator
     # def login(self):
@@ -44,7 +44,7 @@ class Auth:
         password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
 
         if email == self.__super_admin['email']:
-            if hashlib.sha256(password.encode()).hexdigest() == self.__super_admin['password']:
+            if hashlib.sha256(self.__super_admin['password'].encode()).hexdigest() == password:
                 return {'is_login': True, 'role': 'super_admin'}
         user = execute_query("SELECT * FROM users WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,),
                              fetch='one')
@@ -58,8 +58,8 @@ class Auth:
             with self.__database as db:
                 db.execute(query, params)
                 print('Login successful')
-                return True
-        return False
+                return {'is_login': True, 'role': 'user'}
+        return {'is_login': False}
 
     @log_decorator
     def create_user_table(self):
