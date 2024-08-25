@@ -5,8 +5,8 @@ from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
 from main import super_admin_menu
 
-SUPERADMIN_LOGIN ="superadmin"
-SUPERADMIN_PASSWORD ="password"
+SUPERADMIN_LOGIN = "superadmin"
+SUPERADMIN_PASSWORD = "password"
 
 
 class Auth:
@@ -42,8 +42,11 @@ class Auth:
     def login(self):
 
         # threading.Thread(target=self.create_user_table).start()
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 212521e449375be7b843d6301441cdf3eb7a8076
         """
                 Authenticate a user by checking their email and password.
                 Updates the user's login status to True upon successful login.
@@ -51,19 +54,30 @@ class Auth:
 
         email: str = input("Email: ").strip()
         password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
+<<<<<<< HEAD
 
         if email ==SUPERADMIN_LOGIN and password ==SUPERADMIN_PASSWORD:
             return super_admin_menu()
         
         user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,), fetch='one')
 
+=======
+        if email == SUPERADMIN_LOGIN and password == SUPERADMIN_PASSWORD:
+            return super_admin_menu()
+
+        user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
+                             (email,), fetch='one')
+>>>>>>> 212521e449375be7b843d6301441cdf3eb7a8076
 
         if email == self.__super_admin['email']:
             if hashlib.sha256(password.encode()).hexdigest() == self.__super_admin['password']:
                 return {'is_login': True, 'role': 'super_admin'}
         user = execute_query("SELECT * FROM users WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,),
                              fetch='one')
+<<<<<<< HEAD
 
+=======
+>>>>>>> 212521e449375be7b843d6301441cdf3eb7a8076
 
         if user is None:
             print("Login failed")
