@@ -5,7 +5,7 @@ from main_files.decorator.decorator_func import log_decorator
 from page.auth.auth import Auth
 
 from role.filial_manager.color import ColorManager
-from role.filial_manager.manager import CarsManager
+from role.filial_manager.car_manager import CarsManager
 from role.filial_manager.model import ModelManager
 from role.super_admin.sup_admin import Super_admin
 
@@ -30,6 +30,7 @@ def auth_menu():
     except Exception as e:
         print(f'Error: {e}')
         auth_menu()
+
 
 @log_decorator
 def managers_menu():
@@ -99,6 +100,7 @@ def model_menu():
     else:
         print("Invalid input")
         model_menu()
+
 
 @log_decorator
 def cars_menu():
