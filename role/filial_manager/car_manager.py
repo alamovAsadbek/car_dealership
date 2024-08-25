@@ -21,6 +21,7 @@ class CarsManager:
                 MODEL_ID BIGINT NOT NULL REFERENCES MODEL(ID),
                 COLOR_ID BIGINT NOT NULL REFERENCES color(ID),
                 FILIAL_ID BIGINT NOT NULL REFERENCES filial(ID),
+                STATUS VARCHAR(12) NOT NULL DEFAULT NOT SOLD,
                 CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
                 );
             '''
@@ -28,7 +29,6 @@ class CarsManager:
             cursor.execute(query)
             return None
 
-    @log_decorator
     def add_car(self):
         """
         Add a new car to the database.

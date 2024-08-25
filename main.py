@@ -13,9 +13,9 @@ from role.super_admin.manager import Manager
 @log_decorator
 def super_admin_menu():
     print("""
-1. Create manager
-2. Create filial
-3. Show all information                             # Tugallanmagan
+1. Manager
+2. Filial
+3. Show all information                             
 4. Logout
     """)
     choice = input("Choose menu: ")
@@ -252,7 +252,7 @@ def filial_menu_for_sup_admin():
 3. Delete filial
 4. Show all filial
 5. Search filial by name
-5. logout
+6. logout
     """)
     choice = input("Choose menu: ")
     filial = FilialManager()
