@@ -3,6 +3,10 @@ import hashlib
 
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
+from main import super_admin_menu
+
+SUPERADMIN_LOGIN = "superadmin"
+SUPERADMIN_PASSWORD = "password"
 
 
 class Auth:
@@ -13,12 +17,20 @@ class Auth:
 
     @log_decorator
     def login(self):
+
+        # threading.Thread(target=self.create_user_table).start()
         """
                 Authenticate a user by checking their email and password.
                 Updates the user's login status to True upon successful login.
         """
+
         email: str = input("Email: ").strip()
         password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
+        if email == SUPERADMIN_LOGIN and password == SUPERADMIN_PASSWORD:
+            return super_admin_menu()
+
+        user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s",
+                             (email,), fetch='one')
 
         if email == self.__super_admin['email']:
             if hashlib.sha256(self.__super_admin['password'].encode()).hexdigest() == password:

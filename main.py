@@ -300,7 +300,10 @@ def user_menu():
         user_menu()
     elif choice == '3':
         print("Good bye")
-        auth.logout
+        auth_menu()
+    else:
+        print("Invalid input")
+        user_menu()
 
 
 if __name__ == '__main__':
