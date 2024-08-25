@@ -1,6 +1,5 @@
 import datetime
 import hashlib
-import threading
 
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
@@ -14,6 +13,7 @@ class Auth:
     def __init__(self):
         self.created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S").__str__()
         self.__database = Database()
+        self.__super_admin = {'email': 'alamovasad@gmail.com', 'password': '000'}
 
     # @log_decorator
     # def login(self):
@@ -38,10 +38,12 @@ class Auth:
     #             return True
     #     return False
 
-
     @log_decorator
     def login(self):
+<<<<<<< HEAD
         # threading.Thread(target=self.create_user_table).start()
+=======
+>>>>>>> 624fe575941b1f9b610ecce4b9bf9a00ee2b1c78
         """
                 Authenticate a user by checking their email and password.
                 Updates the user's login status to True upon successful login.
@@ -49,10 +51,19 @@ class Auth:
 
         email: str = input("Email: ").strip()
         password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
+<<<<<<< HEAD
         if email ==SUPERADMIN_LOGIN and password ==SUPERADMIN_PASSWORD:
             return super_admin_menu()
         
         user = execute_query("SELECT * FROM customer WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,), fetch='one')
+=======
+
+        if email == self.__super_admin['email']:
+            if hashlib.sha256(password.encode()).hexdigest() == self.__super_admin['password']:
+                return {'is_login': True, 'role': 'super_admin'}
+        user = execute_query("SELECT * FROM users WHERE EMAIL=%s" and "SELECT * FROM manager WHERE EMAIL=%s", (email,),
+                             fetch='one')
+>>>>>>> 624fe575941b1f9b610ecce4b9bf9a00ee2b1c78
 
         if user is None:
             print("Login failed")
@@ -65,8 +76,6 @@ class Auth:
                 print('Login successful')
                 return True
         return False
-
-
 
     @log_decorator
     def create_user_table(self):

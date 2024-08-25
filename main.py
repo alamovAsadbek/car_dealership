@@ -49,6 +49,7 @@ def auth_menu():
         user_input: int = int(input("Choose menu: "))
         if user_input == 1:
             auth.login()
+            auth_menu()
         elif user_input == 2:
             print("Good bye!")
             Auth.logout()
@@ -276,7 +277,6 @@ def filial_menu_for_sup_admin():
         auth.logout()
 
 
-
 @log_decorator
 def user_menu():
     print(
@@ -298,7 +298,10 @@ def user_menu():
         user_menu()
     elif choice == '3':
         print("Good bye")
-        auth.logout()
+        auth_menu()
+    else:
+        print("Invalid input")
+        user_menu()
 
 
 if __name__ == '__main__':

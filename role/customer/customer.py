@@ -1,5 +1,7 @@
+import hashlib
 import threading
 
+from email_sender.email import send_mail
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
 
@@ -19,9 +21,9 @@ class CustomerManager:
             first_name VARCHAR(64) NOT NULL,
             last_name VARCHAR(64) NOT NULL,
             phone_number VARCHAR(64) NOT NULL,
-            gmail VARCHAR(64) NOT NULL,
+            email VARCHAR(64) NOT NULL,
             password VARCHAR(255) UNIQUE NOT NULL,
-            CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT DATE_TRUNC('minute', NOW())
             );
         '''
         with self.db as cursor:
@@ -37,12 +39,28 @@ class CustomerManager:
         first_name = input("Customer first name: ").strip()
         last_name = input("Customer last name: ").strip()
         phone_number = input("Customer phone number: ").strip()
-        gmail = input("Customer gmail: ").strip()
-        query = '''INSERT INTO customers (first_name, last_name, phone_number, gmail) VALUES (%s, %s, %s, %s);'''
-        params = (first_name, last_name, phone_number, gmail)
-        threading.Thread(target=execute_query, args=(query, params)).start()
-        print(f"Customer '{first_name} {last_name}' added successfully.")
-        return None
+        email = input("Customer email: ").strip()
+        password = input("Customer password: ").strip()
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+        subject = "You logged in: "
+        message = f"Login: {email}\nPassword: {password}\n"
+
+        query = """
+        INSERT INTO customers (first_name, last_name, phone_number, email, password)
+        VALUES (%s, %s, %s, %s, %s);
+        """
+        params = (first_name, last_name, phone_number, email, hashed_password)
+
+        try:
+            threading.Thread(target=send_mail, args=(email, subject, message)).start()
+            threading.Thread(target=execute_query, args=(query, params)).start()
+
+            print("Customer added successfully.")
+            return None
+        except Exception as e:
+            print(f"Failed to add customer: {e}")
+            return None
 
     @log_decorator
     def update_customer(self):
@@ -54,11 +72,15 @@ class CustomerManager:
         last_name = input("New Customer last name: ")
         phone_number = input("New Customer phone number: ")
         gmail = input("New Customer gmail: ")
-        execute_query(
-            query="UPDATE customers SET first_name=%s, last_name=%s, phone_number=%s, gmail=%s WHERE ID=%s",
-            params=(first_name, last_name, phone_number, gmail, customer_id)
-        )
-        print(f"Customer ID {customer_id} updated successfully.")
+
+        try:
+            execute_query(
+                query="UPDATE customers SET first_name=%s, last_name=%s, phone_number=%s, gmail=%s WHERE ID=%s",
+                params=(first_name, last_name, phone_number, gmail, customer_id)
+            )
+            print(f"Customer ID {customer_id} updated successfully.")
+        except Exception as e:
+            print(f"Failed to update customer: {e}")
         return None
 
     @log_decorator
@@ -67,8 +89,11 @@ class CustomerManager:
         Delete a customer from the customers table.
         """
         customer_id = int(input("Customer ID: "))
-        execute_query(query="DELETE FROM customers WHERE ID=%s", params=(customer_id,))
-        print(f"Customer ID {customer_id} deleted successfully.")
+        try:
+            execute_query(query="DELETE FROM customers WHERE ID=%s", params=(customer_id,))
+            print(f"Customer ID {customer_id} deleted successfully.")
+        except Exception as e:
+            print(f"Failed to delete customer: {e}")
         return None
 
     @log_decorator
@@ -78,10 +103,13 @@ class CustomerManager:
         """
         query = "SELECT * FROM customers;"
         result = execute_query(query, fetch="all")
-        print("Customers:")
-        for customer in result:
-            print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
-                  Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
+        if result:
+            print("Customers:")
+            for customer in result:
+                print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
+                      Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
+        else:
+            print("No customers found.")
         return None
 
     @log_decorator
@@ -92,8 +120,11 @@ class CustomerManager:
         gmail = input("Customer gmail: ")
         query = "SELECT * FROM customers WHERE gmail LIKE %s;"
         result = execute_query(query, params=("%" + gmail + "%",), fetch="all")
-        print("Customers:")
-        for customer in result:
-            print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
-                  Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
+        if result:
+            print("Customers:")
+            for customer in result:
+                print(f"""- ID: {customer[0]}, First name: {customer[1]}, Last name: {customer[2]}, 
+                      Phone number: {customer[3]}, Gmail: {customer[4]}, Created At: {customer[5]}""")
+        else:
+            print("No customers found.")
         return None
