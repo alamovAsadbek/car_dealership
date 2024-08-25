@@ -119,7 +119,3 @@ class Auth:
         with self.__database as db:
             db.execute(query)
             return True
-
-    @log_decorator
-    def func_there(self):
-        pass
