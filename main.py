@@ -27,8 +27,6 @@ def super_admin_menu():
         super_admin_menu()
     elif choice == '3':
         print("Show all information")
-    elif choice == '5':
-        pass
     elif choice == '4':
         print("Good bye!")
         auth_menu()
