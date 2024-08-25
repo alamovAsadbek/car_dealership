@@ -252,7 +252,7 @@ def filial_menu_for_sup_admin():
 3. Delete filial
 4. Show all filial
 5. Search filial by name
-5. logout
+6. logout
     """)
     choice = input("Choose menu: ")
     filial = FilialManager()
