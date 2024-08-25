@@ -21,6 +21,7 @@ class CustomerManager:
             first_name VARCHAR(64) NOT NULL,
             last_name VARCHAR(64) NOT NULL,
             phone_number VARCHAR(64) NOT NULL,
+            ROLE VARCHAR(64) NOT NULL DEFAULT 'customer',
             email VARCHAR(64) NOT NULL,
             password VARCHAR(255) UNIQUE NOT NULL,
             created_at TIMESTAMP DEFAULT DATE_TRUNC('minute', NOW())

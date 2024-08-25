@@ -297,11 +297,9 @@ def user_menu():
     filial = FilialManager()
     if choice == '1':
         print("Show my bought cars")
-        pass
         user_menu()
     elif choice == '2':
         print("Change my profile password")
-        pass
         user_menu()
     elif choice == '3':
         print("Good bye")
