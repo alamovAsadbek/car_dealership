@@ -277,6 +277,31 @@ def filial_menu_for_sup_admin():
         auth.logout()
 
 
+
+@log_decorator
+def user_menu():
+    print(
+        """
+1.Show my bought cars
+2.Change my profile password
+3.Logout
+
+""")
+    choice = input("Choose menu: ")
+    filial = FilialManager()
+    if choice == '1':
+        print("Show my bought cars")
+        pass
+        user_menu()
+    elif choice == '2':
+        print("Change my profile password")
+        pass
+        user_menu()
+    elif choice == '3':
+        print("Good bye")
+        auth.logout
+
+
 if __name__ == '__main__':
     auth = Auth()
     threading.Thread(target=auth.logout).start()
