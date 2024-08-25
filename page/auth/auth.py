@@ -16,8 +16,6 @@ class Auth:
     @log_decorator
     def login(self):
 
-        # threading.Thread(target=self.create_user_table).start()
-
         """
                 Authenticate a user by checking their email and password.
                 Updates the user's login status to True upon successful login.
