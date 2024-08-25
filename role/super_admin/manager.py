@@ -56,4 +56,14 @@ class Admin:
         print(f"Manager details updated successfully.")
         return None
 
+    @log_decorator
+    def delete_manager(self):
+        """
+        Delete a manager from the database.
+        """
+        manager_id = int(input("Enter manager ID: "))
+        query = "DELETE FROM manager WHERE id=%s"
+        threading.Thread(target=execute_query, args=(query, (manager_id,))).start()
+        print(f"Manager ID {manager_id} deleted successfully.")
+        return None
 
