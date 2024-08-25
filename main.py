@@ -31,6 +31,7 @@ def super_admin_menu():
         print("Show all information")
     elif choice == '4':
         print("Good bye!")
+        threading.Thread(target=auth.logout).start()
         auth_menu()
     else:
         print("Invalid input")
@@ -284,8 +285,11 @@ def filial_menu_for_sup_admin():
         filial.search_filial()
         filial_menu_for_sup_admin()
     elif choice == '6':
-        print("Good bye!")
-        auth.logout()
+        print("Back")
+        super_admin_menu()
+    else:
+        print('Invalid input')
+        filial_menu_for_sup_admin()
 
 
 @log_decorator
