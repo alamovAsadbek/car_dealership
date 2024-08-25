@@ -1,60 +1,92 @@
-<<<<<<< HEAD
-08/25/2024 15:09:53 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000001D033670050>, '\n        CREATE TABLE IF NOT EXISTS USERS (\n        ID SERIAL PRIMARY KEY,\n        FIRSTNAME VARCHAR(255) NOT NULL,\n        LASTNAME VARCHAR(255) NOT NULL,\n        EMAIL VARCHAR(255) NOT NULL UNIQUE,\n        PASSWORD VARCHAR(256) NOT NULL,\n        IS_LOGIN BOOLEAN DEFAULT FALSE,\n        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP\n        );\n        ') kwargs: {}, result: None executed successfully.
-08/25/2024 15:09:53 - main_files.decorator.decorator_func - INFO - Function create_user_table: args: (<page.auth.auth.Auth object at 0x000001D033203410>,) kwargs: {}, result: True executed successfully.
-08/25/2024 15:09:55 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000001D033670050>, 'UPDATE users SET IS_LOGIN=FALSE;') kwargs: {}, result: None executed successfully.
-08/25/2024 15:09:55 - main_files.decorator.decorator_func - INFO - Function logout: args: (<page.auth.auth.Auth object at 0x000001D033203410>,) kwargs: {}, result: True executed successfully.
-08/25/2024 15:10:15 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034018390>, 'SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:15 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {'fetch': 'one'}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:17 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034018E10>, 'SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:18 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {'fetch': 'one'}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:20 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D03401B910>, 'SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:20 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {'fetch': 'one'}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:22 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034011D50>, 'SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:23 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('ahmedovj5016@gmail.com',)) kwargs: {'fetch': 'one'}, result: [1, 'Jasur', 'ahmedovj5016@gmail.com', '941964888', 'a8e0c3c8e84f48cbe3b1520723cbf713dfeeb69aa092a988a788af51150bbe25', False, 1, datetime.datetime(2024, 8, 25, 7, 11)] executed successfully.
-08/25/2024 15:10:26 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000001D033670050>, 'UPDATE users SET IS_LOGIN=%s WHERE EMAIL=%s;', (True, 'ahmedovj5016@gmail.com')) kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:26 - main_files.decorator.decorator_func - INFO - Function login: args: (<page.auth.auth.Auth object at 0x000001D033203410>,) kwargs: {}, result: {'is_login': True, 'role': 'user'} executed successfully.
-08/25/2024 15:10:42 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034025390>, 'SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:42 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {'fetch': 'one'}, result: None executed successfully.
-08/25/2024 15:10:44 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034025390>, 'SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:45 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {'fetch': 'one'}, result: None executed successfully.
-08/25/2024 15:10:47 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034025390>, 'SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:47 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {'fetch': 'one'}, result: None executed successfully.
-08/25/2024 15:10:49 - main_files.decorator.decorator_func - INFO - Function fetchone: args: (<main_files.database.db_setting.Database object at 0x000001D034025390>, 'SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:50 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('SELECT * FROM manager WHERE EMAIL=%s', ('superadmin',)) kwargs: {'fetch': 'one'}, result: None executed successfully.
-08/25/2024 15:10:50 - main_files.decorator.decorator_func - INFO - Function login: args: (<page.auth.auth.Auth object at 0x000001D033203410>,) kwargs: {}, result: False executed successfully.
-08/25/2024 15:10:54 - main_files.decorator.decorator_func - ERROR - Function logout: Auth.logout() missing 1 required positional argument: 'self'
+08/25/2024 16:32:41 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000002363E0E9750>, "\n        CREATE TABLE IF NOT EXISTS USERS (\n        ID SERIAL PRIMARY KEY,\n        FIRSTNAME VARCHAR(255) NOT NULL,\n        LASTNAME VARCHAR(255) NOT NULL,\n        EMAIL VARCHAR(255) NOT NULL UNIQUE,\n        PASSWORD VARCHAR(256) NOT NULL,\n        ROLE VARCHAR(255) NOT NULL DEFAULT 'user',\n        IS_LOGIN BOOLEAN DEFAULT FALSE,\n        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP\n        );\n        ") kwargs: {}, result: None executed successfully.
+08/25/2024 16:32:41 - main_files.decorator.decorator_func - INFO - Function create_user_table: args: (<page.auth.auth.Auth object at 0x000002363E9D18D0>,) kwargs: {}, result: True executed successfully.
+08/25/2024 16:32:44 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000002363E0E9750>, 'UPDATE users SET IS_LOGIN=FALSE;') kwargs: {}, result: None executed successfully.
+08/25/2024 16:32:44 - main_files.decorator.decorator_func - INFO - Function logout: args: (<page.auth.auth.Auth object at 0x000002363E9D18D0>,) kwargs: {}, result: True executed successfully.
+08/25/2024 16:32:51 - main_files.decorator.decorator_func - INFO - Function login: args: (<page.auth.auth.Auth object at 0x000002363E9D18D0>,) kwargs: {}, result: {'is_login': True, 'role': 'super_admin'} executed successfully.
+08/25/2024 16:34:33 - main_files.decorator.decorator_func - ERROR - Function update_manager: invalid literal for int() with base 10: 'er'
 Traceback (most recent call last):
-  File "c:\Jobir n\car_dealership\main.py", line 50, in auth_menu
-    if not result_login['is_login']:
-           ~~~~~~~~~~~~^^^^^^^^^^^^
-TypeError: 'bool' object is not subscriptable
-
-During handling of the above exception, another exception occurred:
-
+  File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Jobir n\car_dealership\role\super_admin\manager.py", line 77, in update_manager
+    manager_id = int(input("Enter manager ID: "))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'er'
+08/25/2024 16:35:16 - main_files.decorator.decorator_func - ERROR - Function execute: syntax error at or near "1"
+LINE 8:                 status BOOLEAN DEFAULT False NOT NULL,1
+                                                              ^
 Traceback (most recent call last):
-  File "c:\Jobir n\car_dealership\main.py", line 47, in auth_menu
-    user_input: int = int(input("Choose menu: "))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: invalid literal for int() with base 10: 'gi pull'
+  File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Jobir n\car_dealership\main_files\database\db_setting.py", line 37, in execute
+    self.cursor.execute(query, params)
+  File "c:\Users\user\AppData\Local\Programs\Python\Python311\Lib\site-packages\psycopg2\extras.py", line 146, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.SyntaxError: syntax error at or near "1"
+LINE 8:                 status BOOLEAN DEFAULT False NOT NULL,1
+                                                              ^
 
-During handling of the above exception, another exception occurred:
+08/25/2024 16:35:17 - main_files.decorator.decorator_func - INFO - Function create_manager_table: args: (<role.super_admin.manager.Manager object at 0x000002363EA614D0>,) kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:27 - main_files.decorator.decorator_func - INFO - Function add_manager: args: (<role.super_admin.manager.Manager object at 0x000002363EA614D0>,) kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:29 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x000002363EA73790>, '\n        INSERT INTO manager (name, email, phone_number, password, filial_id) \n        VALUES (%s, %s, %s, %s, %s);\n        ', ('', '1', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '1')) kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:29 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('\n        INSERT INTO manager (name, email, phone_number, password, filial_id) \n        VALUES (%s, %s, %s, %s, %s);\n        ', ('', '1', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '1')) kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:32 - main_files.decorator.decorator_func - INFO - Function manager_menu_for_sup_admin: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:32 - main_files.decorator.decorator_func - INFO - Function manager_menu_for_sup_admin: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:32 - main_files.decorator.decorator_func - INFO - Function manager_menu_for_sup_admin: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:35:44 - main_files.decorator.decorator_func - ERROR - Function execute: syntax error at or near "1"
+LINE 8:                 status BOOLEAN DEFAULT False NOT NULL,1
+                                                              ^
+Traceback (most recent call last):
+  File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Jobir n\car_dealership\main_files\database\db_setting.py", line 37, in execute
+    self.cursor.execute(query, params)
+  File "c:\Users\user\AppData\Local\Programs\Python\Python311\Lib\site-packages\psycopg2\extras.py", line 146, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.SyntaxError: syntax error at or near "1"
+LINE 8:                 status BOOLEAN DEFAULT False NOT NULL,1
+                                                              ^
 
+08/25/2024 16:35:44 - main_files.decorator.decorator_func - INFO - Function create_manager_table: args: (<role.super_admin.manager.Manager object at 0x000002363EA73390>,) kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:37 - main_files.decorator.decorator_func - INFO - Function add_manager: args: (<role.super_admin.manager.Manager object at 0x000002363EA73390>,) kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:38 - main_files.decorator.decorator_func - INFO - Function manager_menu_for_sup_admin: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:38 - main_files.decorator.decorator_func - INFO - Function manager_menu_for_sup_admin: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:40 - main_files.decorator.decorator_func - ERROR - Function execute: invalid input syntax for type integer: ""
+LINE 3: ...c1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', '');
+                                                                   ^
+Traceback (most recent call last):
+  File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Jobir n\car_dealership\main_files\database\db_setting.py", line 37, in execute
+    self.cursor.execute(query, params)
+  File "c:\Users\user\AppData\Local\Programs\Python\Python311\Lib\site-packages\psycopg2\extras.py", line 146, in execute
+    return super().execute(query, vars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 3: ...c1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', '');
+                                                                   ^
+
+08/25/2024 16:46:40 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('\n        INSERT INTO manager (name, email, phone_number, password, filial_id) \n        VALUES (%s, %s, %s, %s, %s);\n        ', ('Jobir', '', '', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', '')) kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:42 - main_files.decorator.decorator_func - ERROR - Function logout: Auth.logout() missing 1 required positional argument: 'self'
 Traceback (most recent call last):
   File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
     result = func(*args, **kwargs)
              ^^^^^^^^^^^^^^^^^^^^^
 TypeError: Auth.logout() missing 1 required positional argument: 'self'
-08/25/2024 15:10:54 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:54 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:54 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
-08/25/2024 15:10:54 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
-=======
-08/25/2024 15:08:37 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000024546BD7C50>, "\n        CREATE TABLE IF NOT EXISTS USERS (\n        ID SERIAL PRIMARY KEY,\n        FIRSTNAME VARCHAR(255) NOT NULL,\n        LASTNAME VARCHAR(255) NOT NULL,\n        EMAIL VARCHAR(255) NOT NULL UNIQUE,\n        PASSWORD VARCHAR(256) NOT NULL,\n        ROLE VARCHAR(255) NOT NULL DEFAULT 'user',\n        IS_LOGIN BOOLEAN DEFAULT FALSE,\n        CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP\n        );\n        ") kwargs: {}, result: None executed successfully.
-08/25/2024 15:08:37 - main_files.decorator.decorator_func - INFO - Function create_user_table: args: (<page.auth.auth.Auth object at 0x0000024546B3BA50>,) kwargs: {}, result: True executed successfully.
-08/25/2024 15:08:39 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000024546BD7C50>, 'UPDATE users SET IS_LOGIN=FALSE;') kwargs: {}, result: None executed successfully.
-08/25/2024 15:08:39 - main_files.decorator.decorator_func - INFO - Function logout: args: (<page.auth.auth.Auth object at 0x0000024546B3BA50>,) kwargs: {}, result: True executed successfully.
-08/25/2024 15:08:41 - main_files.decorator.decorator_func - INFO - Function login: args: (<page.auth.auth.Auth object at 0x0000024546B3BA50>,) kwargs: {}, result: {'is_login': True, 'role': 'super_admin'} executed successfully.
-08/25/2024 15:08:49 - main_files.decorator.decorator_func - INFO - Function execute: args: (<main_files.database.db_setting.Database object at 0x0000024548C878D0>, '\n        SELECT * FROM USERS WHERE email=%s AND password=%s\n        ', ('asdasd', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6')) kwargs: {}, result: None executed successfully.
-08/25/2024 15:08:49 - main_files.decorator.decorator_func - INFO - Function execute_query: args: ('\n        SELECT * FROM USERS WHERE email=%s AND password=%s\n        ', ('asdasd', '688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6')) kwargs: {}, result: None executed successfully.
-08/25/2024 15:08:49 - main_files.decorator.decorator_func - INFO - Function login: args: (<page.auth.auth.Auth object at 0x0000024546B3BA50>,) kwargs: {}, result: {'is_login': False, 'role': 'admin'} executed successfully.
->>>>>>> e8f5aa369473e6c8c993b5d747414e860ba36b8b
+08/25/2024 16:46:42 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:42 - main_files.decorator.decorator_func - INFO - Function super_admin_menu: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:42 - main_files.decorator.decorator_func - INFO - Function super_admin_menu: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:42 - main_files.decorator.decorator_func - INFO - Function super_admin_menu: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:44 - main_files.decorator.decorator_func - ERROR - Function logout: Auth.logout() missing 1 required positional argument: 'self'
+Traceback (most recent call last):
+  File "c:\Jobir n\car_dealership\main_files\decorator\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+TypeError: Auth.logout() missing 1 required positional argument: 'self'
+08/25/2024 16:46:44 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
+08/25/2024 16:46:44 - main_files.decorator.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.
