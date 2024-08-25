@@ -7,8 +7,8 @@ from page.auth.auth import Auth
 from role.filial_manager.color import ColorManager
 from role.filial_manager.car_manager import CarsManager
 from role.filial_manager.model import ModelManager
-from role.super_admin.filial import Super_admin
-from role.super_admin.manager import Admin
+from role.super_admin.filial import FilialManager
+from role.super_admin.manager import Manager
 
 
 @log_decorator
@@ -212,25 +212,25 @@ def manager_menu_for_sup_admin():
 6. Exit
     """)
     choice = input("Choose menu: ")
-    admin = Admin()
+    manager = Manager()
     if choice == '1':
         print("Create a new manager")
-        admin.add_manager()
+        manager.add_manager()
         manager_menu_for_sup_admin()
     elif choice == '2':
         print("Update manager")
-        admin.update_manager()
+        manager.update_manager()
         manager_menu_for_sup_admin()
     elif choice == '3':
         print("Delete manager")
-        admin.delete_manager()
+        manager.delete_manager()
         manager_menu_for_sup_admin()
     elif choice == '4':
         print("Show all managers")
-        admin.show_all_managers()
+        manager.show_all_managers()
         manager_menu_for_sup_admin()
     elif choice == '5':
-        admin.search_manager()
+        manager.search_manager()
         manager_menu_for_sup_admin()
     elif choice == '6':
         print("Good bye!")
@@ -248,25 +248,25 @@ def filial_menu_for_sup_admin():
 5. logout
     """)
     choice = input("Choose menu: ")
-    sup_admin = Super_admin()
+    filial = FilialManager()
     if choice == '1':
         print("Add new filial")
-        sup_admin.add_filial()
+        filial.add_filial()
         filial_menu_for_sup_admin()
     elif choice == '2':
         print("Update filial")
-        sup_admin.update_filial()
+        filial.update_filial()
         filial_menu_for_sup_admin()
     elif choice == '3':
         print("Delete filial")
-        sup_admin.delete_filial()
+        filial.delete_filial()
         filial_menu_for_sup_admin()
     elif choice == '4':
         print("Show all filial")
-        sup_admin.show_filials()
+        filial.show_filials()
         filial_menu_for_sup_admin()
     elif choice == '5':
-        sup_admin.search_filial()
+        filial.search_filial()
         filial_menu_for_sup_admin()
     elif choice == '6':
         print("Good bye!")
