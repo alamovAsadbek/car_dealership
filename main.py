@@ -8,13 +8,14 @@ from role.filial_manager.color import ColorManager
 from role.filial_manager.car_manager import CarsManager
 from role.filial_manager.model import ModelManager
 from role.super_admin.filial import Super_admin
+from role.super_admin.manager import Admin
 
 
 @log_decorator
 def super_admin_menu():
     print("""
-1. Create a new manager
-2. Create a new filial
+1. Create manager
+2. Create filial
 3. Show all information
 4. Logout
     """)
@@ -22,7 +23,8 @@ def super_admin_menu():
     if choice == '1':
         pass
     elif choice == '2':
-        pass
+        filial_menu_for_sup_admin()
+        super_admin_menu()
     elif choice == '3':
         print("Show all information")
         pass
@@ -197,6 +199,43 @@ def cars_menu():
 #     elif choice == '6':
 #         print("Logout")
 #         managers_menu()
+
+
+@log_decorator
+def manager_menu_for_sup_admin():
+    print("""
+1. Create a new manager
+2. Update the manager
+3. Delete the manager
+4. Show all managers
+5. Search manager by name
+6. Exit
+    """)
+    choice = input("Choose menu: ")
+    admin = Admin()
+    if choice == '1':
+        print("Create a new manager")
+        admin.add_manager()
+        manager_menu_for_sup_admin()
+    elif choice == '2':
+        print("Update manager")
+        admin.update_manager()
+        manager_menu_for_sup_admin()
+    elif choice == '3':
+        print("Delete manager")
+        admin.delete_manager()
+        manager_menu_for_sup_admin()
+    elif choice == '4':
+        print("Show all managers")
+        admin.show_all_managers()
+        manager_menu_for_sup_admin()
+    elif choice == '5':
+        admin.search_manager()
+        manager_menu_for_sup_admin()
+    elif choice == '6':
+        print("Good bye!")
+        super_admin_menu()
+
 
 @log_decorator
 def filial_menu_for_sup_admin():
