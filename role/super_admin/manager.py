@@ -1,7 +1,9 @@
+import hashlib
 import threading
 
 from main_files.database.db_setting import Database, execute_query
 from main_files.decorator.decorator_func import log_decorator
+from email_sender.email import send_mail
 
 
 class Manager:
@@ -31,15 +33,34 @@ class Manager:
         """
         Add a new manager to the database.
         """
+        # Manager jadvalini yaratish jarayonini asenkron tarzda boshlash
         threading.Thread(target=self.create_manager_table).start()
+
+        # Foydalanuvchidan ma'lumotlarni olish
         name = input("Manager Name: ").strip()
         email = input("Manager Email: ").strip()
         phone_number = input("Manager Phone Number: ").strip()
-        filial_id = input("Filial ID: ")
-        query = """INSERT INTO manager (name, email, phone_number, filial_id) VALUES (%s, %s, %s, %s);"""
-        threading.Thread(target=execute_query, args=(query, (name, email, phone_number, filial_id))).start()
-        print(f"Manager '{name}' added successfully.")
-        return None
+        password = input("Manager Password: ").strip()
+
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+        subject = "You logged in: "
+        message = f"Login: {email}\nPassword: {password}\n"
+
+        filial_id = input("Filial ID: ").strip()
+
+        query = """
+        INSERT INTO manager (name, email, phone_number, password, filial_id) 
+        VALUES (%s, %s, %s, %s, %s);
+        """
+
+        try:
+            threading.Thread(target=send_mail, args=(email, subject, message)).start()
+            threading.Thread(target=execute_query,
+                             args=(query, (name, email, phone_number, hashed_password, filial_id))).start()
+            print(f"Manager '{name}' added successfully.")
+        except Exception as e:
+            print(f"Failed to add manager: {e}")
 
     @log_decorator
     def update_manager(self):
