@@ -47,3 +47,4 @@ def sell_car(self, car_id, customer_id, sale_price):
     with self.db as cursor:
         cursor.execute(query_insert, (car_id, customer_id, sale_price))
         print(f"Car with ID {car_id} sold to customer with ID {customer_id} for {sale_price}.")
+
