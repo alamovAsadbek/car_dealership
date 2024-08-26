@@ -71,7 +71,7 @@ def auth_menu():
 def managers_menu():
     print("""
 1. Show all information                             # Tugallanmagan
-2. Customer manager                                 # Tugallanmagan
+2. Customer manager                             
 3. Cars manager
 4. Logout
     """)
