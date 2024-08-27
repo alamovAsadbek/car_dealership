@@ -96,14 +96,18 @@ class CustomerManager:
         except Exception as e:
             print(f"Failed to delete customer: {e}")
         return None
-    
+
+    @log_decorator
     def change_my_password(self):
         """
         change a customer pasword from the customers table.
         """
-        customer_password = int(input("CUSTOMER PASSWORD: "))
+        customer_id = int(input("Customer ID: "))
+        customer_password = int(input("CUSTOMER NEW PASSWORD: "))
+        hashed_password = hashlib.sha256(customer_password.encode()).hexdigest()
         try:
-            execute_query(query="UPDATE FROM customers WHERE PASSWORD=%s", params=(customer_password,))
+            execute_query(query="UPDATE customers SET password=%s WHERE ID=%s",
+                          params=(hashed_password, customer_id))
             print(f"Customer ID {customer_password} updated successfully.")
         except Exception as e:
             print(f"Failed to update customer password: {e}")
