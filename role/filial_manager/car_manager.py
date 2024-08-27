@@ -14,21 +14,20 @@ class CarsManager:
         Create the car table in the database if it does not already exist.
         """
         query = '''
-                CREATE TABLE IF NOT EXISTS car (
-                ID SERIAL PRIMARY KEY,
-                NAME VARCHAR(255) NOT NULL,
-                YEAR INT NOT NULL,
-                MODEL_ID BIGINT NOT NULL REFERENCES MODEL(ID),
-                COLOR_ID BIGINT NOT NULL REFERENCES color(ID),
-                FILIAL_ID BIGINT NOT NULL REFERENCES filial(ID),
-                STATUS VARCHAR(12) NOT NULL DEFAULT NOT SOLD,
-                CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-                );
-            '''
+                       CREATE TABLE IF NOT EXISTS car (
+                       ID SERIAL PRIMARY KEY,
+                       NAME VARCHAR(255) NOT NULL,
+                       YEAR INT NOT NULL,
+                       MODEL_ID BIGINT NOT NULL REFERENCES model(ID),
+                       COLOR_ID BIGINT NOT NULL REFERENCES color(ID),
+                       FILIAL_ID BIGINT NOT NULL REFERENCES filials(ID),
+                       STATUS VARCHAR(12) NOT NULL DEFAULT 'NOT SOLD',
+                       CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                       );
+                   '''
         with self.db as cursor:
             cursor.execute(query)
             return None
-        
 
     def add_car(self):
         """
@@ -36,24 +35,19 @@ class CarsManager:
         """
         threading.Thread(target=self.create_car_table).start()
         car_name = input("Enter car name: ")
-        brand_id = int(input("Enter car brand ID: "))
-        model = input("Enter car model: ")
+        model_id = int(input("Enter car model ID: "))
         year = int(input("Enter car year: "))
         color_id = int(input("Enter car color ID: "))
         filial_id = int(input("Enter car filial ID: "))
 
         query = '''
-                INSERT INTO car (NAME, BRAND_ID, MODEL, YEAR, COLOR_ID, FILIAL_ID) 
-                VALUES (%s, %s, %s, %s, %s, %s);
+                INSERT INTO car (NAME, MODEL_ID, YEAR, COLOR_ID, FILIAL_ID) 
+                VALUES (%s, %s, %s, %s, %s);
             '''
         threading.Thread(target=execute_query,
-                         args=(query, (car_name, brand_id, model, year, color_id, filial_id))).start()
+                         args=(query, (car_name, model_id, year, color_id, filial_id))).start()
         print("Car added successfully.")
         return None
-    
-
-    def buy_car():
-        pass
 
     @log_decorator
     def update_car(self):
@@ -62,20 +56,20 @@ class CarsManager:
         """
         car_id = int(input("Enter car ID: "))
         car_name = input("Enter new car name: ")
-        brand_id = int(input("Enter new car brand ID: "))
         model = input("Enter new car model id: ")
         year = int(input("Enter new car year: "))
         color_id = int(input("Enter new car color ID: "))
         filial_id = int(input("Enter new car filial ID: "))
         query = '''
                 UPDATE car 
-                SET NAME=%s, BRAND_ID=%s, MODEL=%s, YEAR=%s, COLOR_ID=%s, FILIAL_ID=%s 
+                SET NAME=%s, MODEL_ID=%s, YEAR=%s, COLOR_ID=%s, FILIAL_ID=%s 
                 WHERE ID=%s;
             '''
-        params = (car_name, brand_id, model, year, color_id, filial_id, car_id)
+        params = (car_name, model, year, color_id, filial_id, car_id)
         threading.Thread(target=execute_query, args=(query, params)).start()
         print("Car details updated successfully.")
         return None
+
 
     @log_decorator
     def delete_car(self):
