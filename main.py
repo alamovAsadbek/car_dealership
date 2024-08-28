@@ -11,8 +11,6 @@ from role.super_admin.filial import FilialManager
 from role.super_admin.manager import Manager
 from role.user.user import UserManager
 
-auth = Auth
-
 
 @log_decorator
 def super_admin_menu():
@@ -33,7 +31,8 @@ def super_admin_menu():
         print("Show all information")
     elif choice == '4':
         print("Good bye!")
-        threading.Thread(target=auth.logout).start()
+        auth_func = Auth
+        threading.Thread(target=auth_func.logout).start()
         auth_menu()
     else:
         print("Invalid input")
@@ -80,7 +79,7 @@ def auth_menu():
 def managers_menu():
     print("""
 1. Show all information                             # Tugallanmagan
-2. Customer manager                                 # Tugallanmagan
+2. Customer manager
 3. Cars manager
 4. Logout
     """)
