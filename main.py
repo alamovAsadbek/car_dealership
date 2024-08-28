@@ -6,10 +6,12 @@ from role.customer.customer import CustomerManager
 from role.filial_manager.car_manager import CarsManager
 from role.filial_manager.color import ColorManager
 from role.filial_manager.model import ModelManager
-from role.filial_manager.sales import Sales , sell_car
+from role.filial_manager.sales import Sales, sell_car
 from role.super_admin.filial import FilialManager
 from role.super_admin.manager import Manager
 from role.user.user import UserManager
+
+auth = Auth
 
 
 @log_decorator
@@ -53,12 +55,19 @@ def auth_menu():
                 auth_menu()
             elif result_login['role'] == 'super_admin':
                 super_admin_menu()
+                auth_menu()
+            elif result_login['role'] == 'manager':
+                managers_menu()
+                auth_menu()
             elif result_login['role'] == 'user':
                 user_menu()
+                auth_menu()
             auth_menu()
         elif user_input == 2:
             print("Good bye!")
-            Auth.logout()
+            if auth.logout():
+                exit()
+            auth_menu()
         else:
             print("Invalid input")
             auth_menu()
@@ -81,14 +90,15 @@ def managers_menu():
         pass
     elif choice == '2':
         print("Customer filial_manager")
-        pass
+        customer_menu()
+        managers_menu()
     elif choice == '3':
         print("Cars filial_manager")
         cars_menu()
         managers_menu()
     elif choice == '4':
-        print("Logout")
-        managers_menu()
+        print("Exit")
+        auth_menu()
 
 
 @log_decorator
@@ -109,7 +119,7 @@ def color_menu():
         color_manager.show_car_colors()
         color_menu()
     elif choice == '3':
-        print("Back")
+        print("Exit")
         managers_menu()
     else:
         print("Invalid input")
@@ -176,7 +186,7 @@ def cars_menu():
         cars_manager.search_car()
         cars_menu()
     elif choice == '7':
-        print("Logout")
+        print("Exit")
         managers_menu()
 
 
@@ -213,7 +223,7 @@ def customer_menu():
         customer.search_customer()
         customer_menu()
     elif choice == '6':
-        print("Logout")
+        print("Exit")
         managers_menu()
 
 
@@ -249,7 +259,7 @@ def manager_menu_for_sup_admin():
         manager.search_manager()
         manager_menu_for_sup_admin()
     elif choice == '6':
-        print("Good bye!")
+        print("Exit")
         super_admin_menu()
 
 
@@ -285,7 +295,7 @@ def filial_menu_for_sup_admin():
         filial.search_filial()
         filial_menu_for_sup_admin()
     elif choice == '6':
-        print("Back")
+        print("Exit")
         super_admin_menu()
     else:
         print('Invalid input')
@@ -316,7 +326,7 @@ def user_menu():
         print("Change my profile password")
         user_menu()
     elif choice == '3':
-        print("Good bye")
+        print("Exit")
         auth_menu()
     else:
         print("Invalid input")

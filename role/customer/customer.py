@@ -11,32 +11,27 @@ class CustomerManager:
         self.db = Database()
 
     @log_decorator
-    def create_customer_table(self):
-        """
-        Create the customers table in the database if it does not already exist.
-        """
+    def create_users_table(self):
         query = '''
-            CREATE TABLE IF NOT EXISTS customers (
+            CREATE TABLE IF NOT EXISTS users (
             ID SERIAL PRIMARY KEY,
             first_name VARCHAR(64) NOT NULL,
             last_name VARCHAR(64) NOT NULL,
             phone_number VARCHAR(64) NOT NULL,
-            ROLE VARCHAR(64) NOT NULL DEFAULT 'customer',
+            role VARCHAR(64) NOT NULL DEFAULT 'customer',
             email VARCHAR(64) NOT NULL,
             password VARCHAR(255) UNIQUE NOT NULL,
+            status VARCHAR(50) NOT NULL DEFAULT False,
             created_at TIMESTAMP DEFAULT DATE_TRUNC('minute', NOW())
             );
         '''
-        with self.db as cursor:
-            cursor.execute(query)
-            return None
+        with Database() as db:
+            db.cursor.execute(query)
 
     @log_decorator
     def add_customer(self):
-        """
-        Add a new customer to the customers table.
-        """
-        threading.Thread(target=self.create_customer_table).start()
+        threading.Thread(target=self.create_users_table).start()
+
         first_name = input("Customer first name: ").strip()
         last_name = input("Customer last name: ").strip()
         phone_number = input("Customer phone number: ").strip()
@@ -48,7 +43,7 @@ class CustomerManager:
         message = f"Login: {email}\nPassword: {password}\n"
 
         query = """
-        INSERT INTO customers (first_name, last_name, phone_number, email, password)
+        INSERT INTO users (first_name, last_name, phone_number, email, password)
         VALUES (%s, %s, %s, %s, %s);
         """
         params = (first_name, last_name, phone_number, email, hashed_password)
@@ -58,10 +53,9 @@ class CustomerManager:
             threading.Thread(target=execute_query, args=(query, params)).start()
 
             print("Customer added successfully.")
-            return None
         except Exception as e:
             print(f"Failed to add customer: {e}")
-            return None
+        return None
 
     @log_decorator
     def update_customer(self):
@@ -76,7 +70,7 @@ class CustomerManager:
 
         try:
             execute_query(
-                query="UPDATE customers SET first_name=%s, last_name=%s, phone_number=%s, gmail=%s WHERE ID=%s",
+                query="UPDATE users SET first_name=%s, last_name=%s, phone_number=%s, gmail=%s WHERE ID=%s",
                 params=(first_name, last_name, phone_number, gmail, customer_id)
             )
             print(f"Customer ID {customer_id} updated successfully.")
@@ -91,7 +85,7 @@ class CustomerManager:
         """
         customer_id = int(input("Customer ID: "))
         try:
-            execute_query(query="DELETE FROM customers WHERE ID=%s", params=(customer_id,))
+            execute_query(query="DELETE FROM users WHERE ID=%s", params=(customer_id,))
             print(f"Customer ID {customer_id} deleted successfully.")
         except Exception as e:
             print(f"Failed to delete customer: {e}")
@@ -106,7 +100,7 @@ class CustomerManager:
         customer_password = int(input("CUSTOMER NEW PASSWORD: "))
         hashed_password = hashlib.sha256(customer_password.encode()).hexdigest()
         try:
-            execute_query(query="UPDATE customers SET password=%s WHERE ID=%s",
+            execute_query(query="UPDATE users SET password=%s WHERE ID=%s",
                           params=(hashed_password, customer_id))
             print(f"Customer ID {customer_password} updated successfully.")
         except Exception as e:
@@ -118,7 +112,7 @@ class CustomerManager:
         """
         Show all customers in the customers table.
         """
-        query = "SELECT * FROM customers;"
+        query = "SELECT * FROM users;"
         result = execute_query(query, fetch="all")
         if result:
             print("Customers:")
@@ -135,7 +129,7 @@ class CustomerManager:
         Search for customer by gmail in the customers table.
         """
         gmail = input("Customer gmail: ")
-        query = "SELECT * FROM customers WHERE gmail LIKE %s;"
+        query = "SELECT * FROM users WHERE gmail LIKE %s;"
         result = execute_query(query, params=("%" + gmail + "%",), fetch="all")
         if result:
             print("Customers:")

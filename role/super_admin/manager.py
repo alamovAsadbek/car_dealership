@@ -11,10 +11,46 @@ class Manager:
         self.db = Database()
 
     @log_decorator
+    def create_manager_table(self):
+        """
+        Create the manager table in the database if it does not already exist.
+        """
+        query = """
+                CREATE TABLE IF NOT EXISTS manager (
+                    id SERIAL PRIMARY KEY,
+                    name VARCHAR(255) NOT NULL,
+                    email VARCHAR(255) UNIQUE NOT NULL,
+                    phone_number VARCHAR(255) UNIQUE NOT NULL,
+                    password VARCHAR(255) UNIQUE NOT NULL,
+                    status BOOLEAN DEFAULT False NOT NULL,
+                    filial_id INTEGER REFERENCES filials(id),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """
+        with self.db as cursor:
+            cursor.execute(query)
+            return None
+
+    # def get_color_name_by_id(self, color_id):
+    #     """
+    #     Retrieve the color name based on the color_id.
+    #     """
+    #
+    #     query = "SELECT name FROM color WHERE ID = %s"
+    #     with self.db as cursor:
+    #         cursor.execute(query, (color_id,))
+    #         color_name = cursor.fetchone()
+    #         if color_name:
+    #             return color_name[0]
+    #         else:
+    #             return None
+
+    @log_decorator
     def add_manager(self):
         """
         Add a new manager to the database.
         """
+        threading.Thread(target=self.create_manager_table()).start()
         name = input("Manager Name: ").strip()
 
         while True:
