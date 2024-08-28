@@ -91,8 +91,9 @@ class CarsManager:
         result = execute_query(query, params=("%" + name + "%",), fetch="all")
         print("Cars:")
         for car in result:
-            print(
-                f"- ID: {car[0]}, Name: {car[1]}, Brand: {car[2]}, Model: {car[3]}, Year: {car[4]}, Color: {car[5]}, Filial: {car[6]}, Created At: {car[7]}")
+            print(f"ID: {car[0]}, Name: {car[1]}, Year: {car[2]}, Model: {car[3]}, Color: {car[4]}, Branch: {car[5]},"
+                  f"Status: {car[6]} Created At: {car[7]}")
+        return None
 
     @log_decorator
     def show_all_cars(self):
@@ -103,6 +104,6 @@ class CarsManager:
         result = execute_query(query, fetch="all")
         print("Cars:")
         for car in result:
-            print(f"- ID: {car[0]}, Name: {car[1]}, Year: {car[2]}, Model: {car[3]}, Color: {car[4]}, Branch: {car[5]},"
+            print(f"ID: {car[0]}, Name: {car[1]}, Year: {car[2]}, Model: {car[3]}, Color: {car[4]}, Branch: {car[5]},"
                   f"Status: {car[6]} Created At: {car[7]}")
         return None
